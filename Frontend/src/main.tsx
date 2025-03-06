@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import AdminLayout from './layout/AdminLayout.tsx'
 import EmployeeLayout from './layout/EmployeeLayout.tsx'
-import Login from './Login.tsx'
+import Login from './Pages/Login.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
