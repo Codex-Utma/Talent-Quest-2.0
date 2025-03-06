@@ -73,6 +73,16 @@ const login = async (req: Request, res: Response) => {
     }
 }
 
+const logout = async (req: Request, res: Response) => {
+    try {
+        res.clearCookie('auth-token');
+        return returnResponse(res, 200, "Usuario deslogueado correctamente");
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+}
+
 export {
-    login
+    login,
+    logout
 }

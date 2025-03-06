@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const authMiddleware = (userType: 'admin' | 'employee') => async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const authMiddleware = (userType: 'admin' | 'employee' | 'both') => async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const token = req.cookies['auth-token'];
 
@@ -21,8 +20,9 @@ const authMiddleware = (userType: 'admin' | 'employee') => async (req: Request, 
         }
 
         const decoded = jwt.verify(token, JWT_SECRET_KEY) as JwtPayload;
+        const userRole = decoded.userType;
 
-        if(decoded.userType !== userType) {
+        if (userType !== 'both' && userRole !== userType) {
             res.status(401).json({ message: 'Your role is not allowed for this action' });
             return;
         }
@@ -30,52 +30,42 @@ const authMiddleware = (userType: 'admin' | 'employee') => async (req: Request, 
         const userId = Number(decoded.uid);
 
         const user = await prisma.user.findUnique({
-            where: {
-                id: userId
-            },
+            where: { id: userId },
             select: {
                 id: true,
                 name: true,
                 lastName: true,
                 email: true,
-                UserType: {
-                    select: {
-                        name: true
-                    }
-                },
-                Department: {
-                    select: {
-                        name: true
-                    }
-                }
+                UserType: { select: { name: true } },
+                Department: { select: { name: true } }
             }
-        })
+        });
 
-        if(user === null) {
+        if (user === null) {
             res.status(404).json({ message: 'User not found' });
             return;
         }
 
-        if(user.UserType.name.toLowerCase() !== userType) {
+        const userTypeName = user.UserType.name.toLowerCase();
+        if (userType !== 'both' && userTypeName !== userType) {
             res.status(401).json({ message: 'Your role is not allowed for this action' });
             return;
         }
 
         req.body.user = user;
-
         next();
     } catch (error: any) {
-        if(error.name === 'TokenExpiredError') {
+        if (error.name === 'TokenExpiredError') {
             res.status(401).json({ message: 'Token expired' });
             return;
         }
-        if(error.name === 'JsonWebTokenError') {
+        if (error.name === 'JsonWebTokenError') {
             res.status(401).json({ message: 'Invalid token' });
             return;
         }
         res.status(500).json({ message: 'Internal server error' });
         return;
     }
-}
+};
 
 export default authMiddleware;
