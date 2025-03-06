@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import fileupload from 'express-fileupload';
 
 import userRouter from './routes/user.routes'
+import adminRouter from './routes/admin.routes'
 
 const app = express();
 
@@ -25,7 +26,8 @@ app.use(fileupload({
     createParentPath: true
 }));
 
-app.use('/api/users', userRouter);
+app.use('/api/user', userRouter);
+app.use('/api/admin', adminRouter);
 
 const PORT = process.env.PORT || 4000;
 
