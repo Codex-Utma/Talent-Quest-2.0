@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import fileupload from 'express-fileupload';
 
+import userRouter from './routes/user.routes'
+
 const app = express();
 
 dotenv.config();
@@ -22,6 +24,8 @@ app.use(cors({
 app.use(fileupload({
     createParentPath: true
 }));
+
+app.use('/api/users', userRouter);
 
 const PORT = process.env.PORT || 4000;
 
