@@ -27,6 +27,24 @@ const createCourse = async (req: Request, res: Response) => {
     }
 };
 
+const getAllCourses = async (req: Request, res: Response) => {
+    try {
+        const courses = await prisma.course.findMany({
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                amountClasses: true
+            }
+        });
+
+        return returnResponse(res, 200, "Cursos obtenidos exitosamente", courses);
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
-    createCourse
+    createCourse,
+    getAllCourses
 }
