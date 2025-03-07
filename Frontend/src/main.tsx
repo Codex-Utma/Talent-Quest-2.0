@@ -5,6 +5,7 @@ import './index.css'
 import AdminLayout from './layout/AdminLayout.tsx'
 import EmployeeLayout from './layout/EmployeeLayout.tsx'
 import Login from './Pages/Login.tsx'
+import Adduser from './Pages/Admin/Adduser.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
         
 
         <Route path="/admin" element={<AdminLayout />} >
+        <Route path="Adduser" element={<Adduser />} />
          
 
         </Route>
