@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { createProject } from "../../controllers/admin/project.controller";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello from project routes");
+router.post("/", (req, res) => {
+    createProject(req, res);
 });
 
 export default router;
