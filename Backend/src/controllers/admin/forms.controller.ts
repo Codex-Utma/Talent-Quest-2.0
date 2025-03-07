@@ -38,9 +38,16 @@ const getProjectsByName = async (req: Request, res: Response) => {
 
         const projects = await prisma.project.findMany({
             where: {
-                name: {
-                    contains: name.toString()
-                }
+                AND: [
+                    {
+                        name: {
+                            contains: name.toString()
+                        }
+                    },
+                    {
+                        isFinished: false
+                    }
+                ]
             },
             select: {
                 id: true,
