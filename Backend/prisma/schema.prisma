@@ -53,6 +53,7 @@ model Project {
   id Int @id @default(autoincrement())
   name String @db.VarChar(32)
   description String @db.VarChar(128)
+  isFinished Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   users ProjectAssigned[]
@@ -145,7 +146,6 @@ model ProjectAssigned {
   projectId Int
   User User @relation(fields: [userId], references: [id])
   userId Int
-  isFinished Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
