@@ -28,6 +28,37 @@ const getRegisterFormData = async (req: Request, res: Response) => {
     }
 }
 
+const getProjectsByName = async (req: Request, res: Response) => {
+    try {
+        const { name } = req.query;
+
+        if (!name) {
+            return returnResponse(res, 400, "Faltan campos por completar");
+        }
+
+        const projects = await prisma.project.findMany({
+            where: {
+                name: {
+                    contains: name.toString()
+                }
+            },
+            select: {
+                id: true,
+                name: true
+            }
+        });
+
+        if (projects.length === 0) {
+            return returnResponse(res, 204, "No se encontraron proyectos");
+        }
+
+        return returnResponse(res, 200, "Proyectos encontrados", projects);
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
-    getRegisterFormData
+    getRegisterFormData,
+    getProjectsByName
 }
