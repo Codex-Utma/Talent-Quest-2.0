@@ -7,7 +7,7 @@ async function fakeUsers() {
         await prisma.user.createMany({
             data: [
                 {
-                    id: 1,
+                    id: 'UTM22030587',
                     name: "Admin",
                     lastName: "Admin",
                     email: "admin@example.com",
@@ -16,7 +16,7 @@ async function fakeUsers() {
                     password: "$2a$12$Kyfw0OrJ9PIsNBa2L2wtw.o5Lhs5xKpWikgImAR8N4EGDFhoJRDT2"
                 },
                 {
-                    id: 2,
+                    id: 'UTM22030588',
                     name: "Employee",
                     lastName: "Employee",
                     email: "employee@example.com",

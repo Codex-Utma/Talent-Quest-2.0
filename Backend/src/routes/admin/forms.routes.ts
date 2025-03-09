@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCoursesByName, getProjectsByName, getRegisterFormData } from "../../controllers/admin/forms.controller";
+import { getAvailableEmployeesByName, getCoursesByName, getProjectsByName, getRegisterFormData } from "../../controllers/admin/forms.controller";
 
 const router = Router();
 
@@ -9,6 +9,10 @@ router.get("/register", (req, res) => {
 
 router.get("/projects", (req, res) => {
     getProjectsByName(req, res);
+});
+
+router.get("/employees", (req, res) => {
+    getAvailableEmployeesByName(req, res);
 });
 
 router.get("/courses", (req, res) => {

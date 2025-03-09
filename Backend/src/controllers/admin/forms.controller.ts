@@ -38,9 +38,16 @@ const getProjectsByName = async (req: Request, res: Response) => {
 
         const projects = await prisma.project.findMany({
             where: {
-                name: {
-                    contains: name.toString()
-                }
+                AND: [
+                    {
+                        name: {
+                            contains: name.toString()
+                        }
+                    },
+                    {
+                        isFinished: false
+                    }
+                ]
             },
             select: {
                 id: true,
@@ -88,8 +95,51 @@ const getCoursesByName = async (req: Request, res: Response) => {
     }
 };
 
+const getAvailableEmployeesByName = async (req: Request, res: Response) => {
+    try {
+        const name = req.query.name;
+
+        if (!name) {
+            return returnResponse(res, 400, "Faltan campos por completar");
+        }
+
+        const employees = await prisma.user.findMany({
+            where: {
+                AND: [
+                    {
+                        name: {
+                            contains: name.toString()
+                        }
+                    },
+                    {
+                        UserType: {
+                            name: "Employee"
+                        }
+                    },
+                    {
+                        projectId: null
+                    }
+                ]
+            },
+            select: {
+                id: true,
+                name: true
+            }
+        });
+
+        if (employees.length === 0) {
+            return returnResponse(res, 204, "No se encontraron empleados disponibles");
+        }
+
+        return returnResponse(res, 200, "Empleados encontrados", employees);
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
     getRegisterFormData,
     getProjectsByName,
-    getCoursesByName
+    getCoursesByName,
+    getAvailableEmployeesByName
 }
