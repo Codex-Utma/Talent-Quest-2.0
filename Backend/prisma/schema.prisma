@@ -53,14 +53,16 @@ model Project {
   id Int @id @default(autoincrement())
   name String @db.VarChar(32)
   description String @db.VarChar(128)
+  isFinished Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   users ProjectAssigned[]
   coursesNeeded CoursesNeeded[]
+  usersProject User[]
 }
 
 model User {
-  id Int @id
+  id String @id
   name String @db.VarChar(32)
   lastName String @db.VarChar(32)
   email String @db.VarChar(128)
@@ -69,6 +71,8 @@ model User {
   userTypeId Int
   Department Department @relation(fields: [departmentId], references: [id])
   departmentId Int
+  Project Project? @relation(fields: [projectId], references: [id])
+  projectId Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   insignias UserInsignia[]
@@ -81,7 +85,7 @@ model User {
 model UserInsignia {
   id Int @id @default(autoincrement())
   User User @relation(fields: [userId], references: [id])
-  userId Int
+  userId String
   Insignia Insignia @relation(fields: [insigniaId], references: [id])
   insigniaId Int
   createdAt DateTime @default(now())
@@ -144,8 +148,7 @@ model ProjectAssigned {
   Project Project @relation(fields: [projectId], references: [id])
   projectId Int
   User User @relation(fields: [userId], references: [id])
-  userId Int
-  isFinished Boolean @default(false)
+  userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -165,7 +168,7 @@ model Progress {
   Course Course @relation(fields: [courseId], references: [id])
   courseId Int
   User User @relation(fields: [userId], references: [id])
-  userId Int
+  userId String
   percentage Decimal @db.Decimal(5, 2) @default(0)
   isFinished Boolean @default(false)
   createdAt DateTime @default(now())
@@ -177,7 +180,7 @@ model ClassCompleted {
   Class Class @relation(fields: [classId], references: [id])
   classId Int
   User User @relation(fields: [userId], references: [id])
-  userId Int
+  userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -198,7 +201,7 @@ model CertificationUser {
   Certification Certification @relation(fields: [certificationId], references: [id])
   certificationId Int
   User User @relation(fields: [userId], references: [id])
-  userId Int
+  userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

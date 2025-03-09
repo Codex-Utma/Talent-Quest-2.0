@@ -50,7 +50,7 @@ const login = async (req: Request, res: Response) => {
             return returnResponse(res, 401, "Contraseña incorrecta");
         }
 
-        const token = generateJWT(Number(user.id), user.name, user.lastName, userType);
+        const token = generateJWT(user.id, user.name, user.lastName, userType);
 
         const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY as string;
         if (!JWT_SECRET_KEY) {
