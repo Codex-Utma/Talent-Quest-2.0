@@ -53,9 +53,9 @@ const createProject = async (req: Request, res: Response) => {
 
 const setProjectToEmployees = async (req: Request, res: Response) => {
     try {
-        const { projectId, employees } = req.body;
+        const { projectId, employeeId } = req.body;
 
-        if (!projectId || !employees) {
+        if (!projectId || !employeeId) {
             return returnResponse(res, 400, "Faltan campos por completar");
         }
 
@@ -69,42 +69,77 @@ const setProjectToEmployees = async (req: Request, res: Response) => {
             return returnResponse(res, 404, "El proyecto no existe");
         }
 
-        const employeesData = await prisma.user.findMany({
+        const requiredCourses = await prisma.coursesNeeded.findMany({
             where: {
-                id: {
-                    in: employees
-                }
+                projectId
+            },
+            select: {
+                courseId: true
+            }
+        });
+
+        const employeeData = await prisma.user.findUnique({
+            where: {
+                id: employeeId
             },
             select: {
                 id: true
             }
         });
 
-        if (employeesData.length !== employees.length) {
-            return returnResponse(res, 404, "Uno o más empleados no existen");
+        if (!employeeData) {
+            return returnResponse(res, 404, "El empleado no existe");
         }
 
-        await prisma.user.updateMany({
+        const employeeCourses = await prisma.progress.findMany({
             where: {
-                id: {
-                    in: employees
-                }
+                AND: [
+                    {
+                        userId: employeeId
+                    },
+                    {
+                        isFinished: true
+                    }
+                ]
+            },
+            select: {
+                courseId: true
+            }
+        });
+
+        const missingCourses = requiredCourses.filter(course => {
+            return !employeeCourses.find(employeeCourse => employeeCourse.courseId === course.courseId);
+        });
+
+        if (missingCourses.length > 0) {
+            await prisma.progress.createMany({
+                data: missingCourses.map(course => {
+                    return {
+                        userId: employeeId,
+                        courseId: course.courseId
+                    }
+                })
+            })
+            return returnResponse(res, 200, "El empleado no ha completado los cursos necesarios y se le han asignado");
+        };
+
+        await prisma.user.update({
+            where: {
+                id: employeeId
             },
             data: {
                 projectId
             }
         });
 
-        await Promise.all(employeesData.map(async (employee) => {
-            await prisma.projectAssigned.create({
-                data: {
-                    projectId,
-                    userId: employee.id
-                }
-            });
-        }));
+        await prisma.projectAssigned.create({
+            data: {
+                projectId,
+                userId: employeeId
+            }
+        });
 
-        return returnResponse(res, 200, "Proyecto asignado a los empleados correctamente");
+        return returnResponse(res, 200, "Proyecto asignado al empleado");
     } catch (error) {
         return returnResponse(res, 500, "Error interno del servidor");
     }
