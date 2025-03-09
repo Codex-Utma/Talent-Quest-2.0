@@ -97,6 +97,84 @@ const createResourceFile = async (req: Request, res: Response) => {
     }
 };
 
+const createResourceLink = async (req: Request, res: Response) => {
+    try {
+
+        const { name, description, classId, moduleId, courseId, url } = req.body;
+
+        if(!name || !description || !classId || !moduleId || !courseId || !url) {
+            return returnResponse(res, 400, "Faltan campos por llenar");
+        }
+
+        const resourceType = await prisma.resourceType.findFirst({
+            where: {
+                description: "url"
+            },
+            select: {
+                id: true
+            }
+        });
+
+        if(resourceType === null) {
+            return returnResponse(res, 500, "Error interno del servidor");
+        }
+
+        const courseExists = await prisma.course.findFirst({
+            where: {
+                id: Number(courseId)
+            },
+            select: {
+                id: true
+            }
+        });
+
+        if(courseExists === null) {
+            return returnResponse(res, 404, "Curso no encontrado");
+        }
+
+        const moduleExists = await prisma.module.findFirst({
+            where: {
+                id: Number(moduleId)
+            },
+            select: {
+                id: true
+            }
+        });
+
+        if(moduleExists === null) {
+            return returnResponse(res, 404, "Módulo no encontrado");
+        }
+
+        const classExists = await prisma.class.findFirst({
+            where: {
+                id: Number(classId)
+            },
+            select: {
+                id: true
+            }
+        });
+
+        if(classExists === null) {
+            return returnResponse(res, 404, "Clase no encontrada");
+        }
+
+        await prisma.resource.create({
+            data: {
+                name,
+                description,
+                url,
+                classId: Number(classId),
+                resourceTypeId: resourceType.id,
+            }
+        });
+
+        return returnResponse(res, 200, "Enlace creado correctamente");
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
-    createResourceFile
+    createResourceFile,
+    createResourceLink
 }
