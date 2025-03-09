@@ -9,7 +9,7 @@ const createClass = async (req: Request, res: Response) => {
     try {
         const { name, description, moduleId, courseId } = req.body;
 
-        if (!name || !description || !moduleId) {
+        if (!name || !description || !moduleId || !courseId) {
             return httpResponse(res, 400, "Todos los campos son requeridos");
         }
 
