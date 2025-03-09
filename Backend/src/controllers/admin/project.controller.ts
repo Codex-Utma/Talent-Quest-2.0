@@ -51,6 +51,109 @@ const createProject = async (req: Request, res: Response) => {
     }
 };
 
+const setProjectToEmployees = async (req: Request, res: Response) => {
+    try {
+        const { projectId, employees } = req.body;
+
+        if (!projectId || !employees) {
+            return returnResponse(res, 400, "Faltan campos por completar");
+        }
+
+        const project = await prisma.project.findUnique({
+            where: {
+                id: projectId
+            }
+        });
+
+        if (!project) {
+            return returnResponse(res, 404, "El proyecto no existe");
+        }
+
+        const employeesData = await prisma.user.findMany({
+            where: {
+                id: {
+                    in: employees
+                }
+            },
+            select: {
+                id: true
+            }
+        });
+
+        if (employeesData.length !== employees.length) {
+            return returnResponse(res, 404, "Uno o más empleados no existen");
+        }
+
+        await prisma.user.updateMany({
+            where: {
+                id: {
+                    in: employees
+                }
+            },
+            data: {
+                projectId
+            }
+        });
+
+        await Promise.all(employeesData.map(async (employee) => {
+            await prisma.projectAssigned.create({
+                data: {
+                    projectId,
+                    userId: employee.id
+                }
+            });
+        }));
+
+        return returnResponse(res, 200, "Proyecto asignado a los empleados correctamente");
+    } catch (error) {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
+const finishProject = async (req: Request, res: Response) => {
+    try {
+        const projectId: number = parseInt(req.params.projectId);
+
+        if (!projectId) {
+            return returnResponse(res, 400, "Faltan campos por completar");
+        }
+
+        const project = await prisma.project.findUnique({
+            where: {
+                id: projectId
+            }
+        });
+
+        if (!project) {
+            return returnResponse(res, 404, "El proyecto no existe");
+        }
+
+        await prisma.project.update({
+            where: {
+                id: projectId
+            },
+            data: {
+                isFinished: true
+            }
+        });
+
+        await prisma.user.updateMany({
+            where: {
+                projectId
+            },
+            data: {
+                projectId: null
+            }
+        });
+
+        return returnResponse(res, 200, "Proyecto finalizado");
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
-    createProject
+    createProject,
+    setProjectToEmployees,
+    finishProject
 }
