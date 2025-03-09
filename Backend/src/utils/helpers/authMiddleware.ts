@@ -27,7 +27,7 @@ const authMiddleware = (userType: 'admin' | 'employee' | 'both') => async (req: 
             return;
         }
 
-        const userId = Number(decoded.uid);
+        const userId = decoded.uid;
 
         const user = await prisma.user.findUnique({
             where: { id: userId },
