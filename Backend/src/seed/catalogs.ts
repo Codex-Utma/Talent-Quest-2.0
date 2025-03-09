@@ -29,6 +29,31 @@ async function fakeCatalogs() {
                 },
             ]
         });
+
+        await prisma.resourceType.createMany({
+            data: [
+                {
+                    name: "Image",
+                    description: "png"
+                },
+                {
+                    name: "Image",
+                    description: "jpg"
+                },
+                {
+                    name: "Image",
+                    description: "jpeg"
+                },
+                {
+                    name: "Document",
+                    description: "pdf"
+                },
+                {
+                    name: "External Link",
+                    description: "url"
+                }
+            ]
+        });
     } catch (error) {
         console.log(error);
         throw new Error("Error seeding catalogs");
