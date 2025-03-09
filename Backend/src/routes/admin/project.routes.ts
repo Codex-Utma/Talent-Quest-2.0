@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createProject, finishProject, setProjectToEmployees } from "../../controllers/admin/project.controller";
+import { createProject, finishProject, setProjectToEmployee } from "../../controllers/admin/project.controller";
 
 const router = Router();
 
@@ -8,7 +8,7 @@ router.post("/", (req, res) => {
 });
 
 router.post("/setProject", (req, res) => {
-    setProjectToEmployees(req, res);
+    setProjectToEmployee(req, res);
 });
 
 router.patch("/finish/:projectId", (req, res) => {

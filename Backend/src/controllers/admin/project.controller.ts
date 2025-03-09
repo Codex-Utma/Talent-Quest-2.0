@@ -51,7 +51,7 @@ const createProject = async (req: Request, res: Response) => {
     }
 };
 
-const setProjectToEmployees = async (req: Request, res: Response) => {
+const setProjectToEmployee = async (req: Request, res: Response) => {
     try {
         const { projectId, employeeId } = req.body;
 
@@ -189,6 +189,6 @@ const finishProject = async (req: Request, res: Response) => {
 
 export {
     createProject,
-    setProjectToEmployees,
+    setProjectToEmployee,
     finishProject
 }
