@@ -111,7 +111,7 @@ const Adduser = () => {
                         />
                     </div>
 
-                    {/* Curso Asignado */}
+                    {/* Departamento */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700  text-left">Departamento</label>
                         <select
@@ -125,7 +125,25 @@ const Adduser = () => {
                             <option value="curso1">Recursos Humanos</option>
                             <option value="curso2">Automatización</option>
                             <option value="curso3">Desarrollo</option>
-                            <option value="curso4">IA</option>
+                            <option value="curso3">Inteligencia Artificial</option>
+
+                            
+                        </select>
+                    </div>
+
+                    {/* Tipo de ususario */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700  text-left">Tipo de Usuario</label>
+                        <select
+                            name="curso"
+                            value={formData.curso}
+                            onChange={handleChange}
+                            className="w-full border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            required
+                        >
+                            <option value="">Seleccione un Tipo de Usuario</option>
+                            <option value="curso1">Administrador</option>
+                            <option value="curso2">Empleado</option>
                         </select>
                     </div>
 
