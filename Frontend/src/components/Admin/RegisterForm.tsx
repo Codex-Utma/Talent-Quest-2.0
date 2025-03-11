@@ -160,6 +160,7 @@ export default function RegisterForm({departments, userTypes}: {departments: Dep
                         <button
                             type="button"
                             className="w-full py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                            onClick={() => window.history.back()}
                         >
                             Cancelar
                         </button>
