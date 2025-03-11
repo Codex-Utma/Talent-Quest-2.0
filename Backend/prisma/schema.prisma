@@ -135,7 +135,7 @@ model Resource {
   name String @db.VarChar(32)
   description String @db.VarChar(128)
   url String @db.VarChar(128)
-  type ResourceType @relation(fields: [resourceTypeId], references: [id])
+  ResourceType ResourceType @relation(fields: [resourceTypeId], references: [id])
   resourceTypeId Int
   Class Class @relation(fields: [classId], references: [id])
   classId Int

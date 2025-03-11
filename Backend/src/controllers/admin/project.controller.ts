@@ -140,7 +140,7 @@ const setProjectToEmployee = async (req: Request, res: Response) => {
         });
 
         return returnResponse(res, 200, "Proyecto asignado al empleado");
-    } catch (error) {
+    } catch {
         return returnResponse(res, 500, "Error interno del servidor");
     }
 };
