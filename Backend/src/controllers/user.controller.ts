@@ -82,7 +82,73 @@ const logout = async (req: Request, res: Response) => {
     }
 }
 
+const register = async (req: Request, res: Response) => {
+    try {
+        const { id, name, lastName, email, password, userTypeId, departmentId } = req.body;
+
+        if (!id || !name || !lastName || !email || !password || !userTypeId || !departmentId) {
+            return returnResponse(res, 400, "Todos los campos son obligatorios");
+        }
+
+        const userType = await prisma.userType.findFirst({
+            where: {
+                id: Number(userTypeId)
+            }
+        });
+
+        if (!userType) {
+            return returnResponse(res, 404, "El tipo de usuario no existe");
+        }
+
+        const department = await prisma.department.findFirst({
+            where: {
+                id: Number(departmentId)
+            }
+        });
+
+        if (!department) {
+            return returnResponse(res, 404, "El departamento no existe");
+        }
+
+        const user = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    {
+                        id
+                    },
+                    {
+                        email
+                    }
+                ]
+            }
+        });
+
+        if (user) {
+            return returnResponse(res, 409, "El usuario ya existe");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        await prisma.user.create({
+            data: {
+                id,
+                name,
+                lastName,
+                email,
+                password: hashedPassword,
+                userTypeId: Number(userTypeId),
+                departmentId: Number(departmentId)
+            }
+        });
+
+        return returnResponse(res, 201, "Usuario registrado correctamente");
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
     login,
-    logout
+    logout,
+    register
 }
