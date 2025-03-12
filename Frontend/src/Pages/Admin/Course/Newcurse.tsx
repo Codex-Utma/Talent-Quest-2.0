@@ -7,7 +7,7 @@ import { AxiosInstance } from "../../../config/axios";
 
 // import { AxiosInstance } from "../config/axios";
 
-const Newcurse = () => {
+const Newcourse = () => {
 
       const { register, handleSubmit } = useForm<CourseType>({
         resolver: zodResolver(courseSchema),
@@ -94,4 +94,4 @@ const Newcurse = () => {
     );
 };
 
-export default Newcurse;
+export default Newcourse;

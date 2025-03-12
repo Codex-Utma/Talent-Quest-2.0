@@ -34,7 +34,9 @@ const CursoAsociado = () => {
         }
         setFormData({ ...formData, curso: "" }); // limpiar el campo de entrada
     };
+}
 
+const Newproject = () => {
     return (
         <div className="flex flex-col p-8 bg-transparent">
             {/* Navegación */}
@@ -134,4 +136,4 @@ const CursoAsociado = () => {
     );
 };
 
-export default CursoAsociado;
+export default Newproject;
