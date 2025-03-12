@@ -1,3 +1,5 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const Worker = () => {
     return (
         <div className="flex flex-col gap-2 p-8 bg-transparent">

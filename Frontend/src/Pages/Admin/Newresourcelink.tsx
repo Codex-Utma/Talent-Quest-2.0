@@ -1,5 +1,5 @@
 
-const Resourcelink= () => {
+const Newresourcelink= () => {
     return (
         <div className="flex flex-col p-8 bg-transparent">
             {/* Navegación */}
@@ -59,4 +59,4 @@ const Resourcelink= () => {
     );
 };
 
-export default Resourcelink;
+export default Newresourcelink;

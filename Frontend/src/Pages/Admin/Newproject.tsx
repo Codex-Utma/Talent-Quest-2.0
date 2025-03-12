@@ -1,5 +1,5 @@
 
-const Newproyect = () => {
+const Newproject = () => {
     return (
         <div className="flex flex-col p-8 bg-transparent">
             {/* Navegación */}
@@ -78,4 +78,4 @@ const Newproyect = () => {
     );
 };
 
-export default Newproyect;
+export default Newproject;
