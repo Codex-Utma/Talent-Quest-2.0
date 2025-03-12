@@ -1,5 +1,5 @@
 
-const Newcurse = () => {
+const Newcourse = () => {
     return (
         <div className="bg-gray-50 min-h-screen">
             {/* Navegación */}
@@ -68,4 +68,4 @@ const Newcurse = () => {
     );
 };
 
-export default Newcurse;
+export default Newcourse;
