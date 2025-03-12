@@ -22,21 +22,23 @@ createRoot(document.getElementById('root')!).render(
 
       <Route index element={<Login />} />
 
-        
+
 
         <Route path="/admin" element={<AdminLayout />} >
-        <Route path="Adduser" element={<Adduser />} />
-        <Route path="Worker" element={<Worker />} />
-        <Route path="Newcurse" element={<Newcurse />} />
-        <Route path="Newmodule" element={<Newmodule />} />
-        <Route path="Newclass" element={<Newclass />} />
-        <Route path="Resource" element={<Resource />} />
-        <Route path="Resourcelink" element={<Resourcelink />} />
-        <Route path="Newproyect" element={<Newproyect />} />
-        <Route path="Assignworker" element={<Assignworker />} />
+          <Route path="Adduser" element={<Adduser />} />
+          <Route path="Worker" element={<Worker />} />
+          <Route path="Course" >
+            <Route path="Add" element={<Newcurse />} />
+          </Route>
+          <Route path="Newmodule" element={<Newmodule />} />
+          <Route path="Newclass" element={<Newclass />} />
+          <Route path="Resource" element={<Resource />} />
+          <Route path="Resourcelink" element={<Resourcelink />} />
+          <Route path="Newproyect" element={<Newproyect />} />
+          <Route path="Assignworker" element={<Assignworker />} />
+          <Route path="PanelUsuario" element={<MisCursos />} >
 
-         
-
+          </Route>
         </Route>
 
         <Route path="/employee" element={<EmployeeLayout />} >
