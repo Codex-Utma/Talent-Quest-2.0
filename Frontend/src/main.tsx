@@ -7,8 +7,8 @@ import EmployeeLayout from './layout/EmployeeLayout.tsx'
 import Login from './Pages/Login.tsx'
 import Adduser from './Pages/Admin/Adduser.tsx'
 import Worker from './Pages/Admin/Worker.tsx'
-import Newcurse from './Pages/Admin/Newcurse.tsx'
-import Newmodule from './Pages/Admin/Newmodule.tsx'
+import Newcurse from './Pages/Admin/Course/Newcurse.tsx'
+import Newmodule from './Pages/Admin/Module/Newmodule.tsx'
 import Newclass from './Pages/Admin/Newclass.tsx'
 import Resource from './Pages/Admin/Resource.tsx'
 import Resourcelink from './Pages/Admin/Resourcelink.tsx'
@@ -25,11 +25,14 @@ createRoot(document.getElementById('root')!).render(
 
 
         <Route path="/admin" element={<AdminLayout />} >
-          <Route path="Adduser" element={<Adduser />} />
-          <Route path="Worker" element={<Worker />} />
-          <Route path="Course" >
+          <Route path="Register" element={<Adduser />} />
+          <Route path="Courses" >
             <Route path="Add" element={<Newcurse />} />
           </Route>
+          <Route path="Modules">
+            <Route path=":courseId/Add" element={<Newmodule />} />
+          </Route>
+          <Route path="Worker" element={<Worker />} />
           <Route path="Newmodule" element={<Newmodule />} />
           <Route path="Newclass" element={<Newclass />} />
           <Route path="Resource" element={<Resource />} />

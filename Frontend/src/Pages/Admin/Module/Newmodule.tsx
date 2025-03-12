@@ -1,31 +1,36 @@
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { courseSchema } from "../../schemas/course.schema";
-import { CourseType } from "../../types/course";
-import { AxiosInstance } from "../../config/axios";
+import { moduleSchema } from "../../../schemas/module.schema";
+import { ModuleType } from "../../../types/module";
+import { AxiosInstance } from "../../../config/axios";
 
-// import { AxiosInstance } from "../config/axios";
+import { useParams } from "react-router-dom";
 
-const Newcurse = () => {
+const Newmodule = () => {
 
-      const { register, handleSubmit } = useForm<CourseType>({
-        resolver: zodResolver(courseSchema),
-      });
+    const { courseId } = useParams();
 
-      const onSuccess = async (data: CourseType) => {
+    const { register, handleSubmit } = useForm<ModuleType>({
+        resolver: zodResolver(moduleSchema),
+    });
+
+    const onSuccess = async (data: ModuleType) => {
         try {
-            const response = await AxiosInstance.post("/admin/course", data);
-            alert(response.data?.message);
+            const response = await AxiosInstance.post(`/admin/module`, {
+                ...data,
+                courseId,
+            });
+            alert(response.data.message);
         } catch (error: any) {
             alert(error.response.data.message);
         }
-      }
+    }
 
-      const onError = (errors: FieldErrors) => {
-        alert("Error al crear el curso");
+    const onError = (errors: FieldErrors) => {
+        alert("Error al crear el módulo");
         console.log(errors);
-      }
+    }
 
     return (
         <div className="bg-gray-50 min-h-screen">
@@ -41,9 +46,6 @@ const Newcurse = () => {
                                 <a href="#" className="border-custom text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                                     Cursos
                                 </a>
-                                <div className="flex-shrink-0 flex justify-end items-center ">
-                                <img className="h-8 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png" alt="Logo" />
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -53,20 +55,26 @@ const Newcurse = () => {
             {/* Contenido Principal */}
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="mb-8">
-                    <h1 className="text-2xl font-bold text-gray-900">Nuevo Curso</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">Nuevo Módulo</h1>
+                    <div className="mt-2 text-sm text-gray-500">
+                        <span>Cursos</span>
+                        <span className="mx-2">/</span>
+                        <span>Módulos</span>
+
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-6">
                     <div className="col-span-1">
                         <div className="bg-white shadow rounded-lg p-6">
-                            <h2 className="text-lg font-medium text-gray-900 mb-4">Detalles del Curso</h2>
+                            <h2 className="text-lg font-medium text-gray-900 mb-4">Detalles del Módulo</h2>
                             <form onSubmit={handleSubmit(onSuccess, onError)}>
                                 <div className="space-y-6">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700">Título del Curso</label>
+                                        <label className="block text-sm font-medium text-gray-700">Título del Módulo</label>
                                         <input type="text"
                                             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-custom focus:border-custom sm:text-sm"
-                                            placeholder="Curso..."
+                                            placeholder="Modulo..."
                                             {...register("name")}
                                             />
                                     </div>
@@ -74,7 +82,7 @@ const Newcurse = () => {
                                         <label className="block text-sm font-medium text-gray-700">Descripción</label>
                                         <textarea rows={4}
                                             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-custom focus:border-custom sm:text-sm"
-                                            placeholder="Describe el contenido del curso..."
+                                            placeholder="Describe el contenido del módulo..."
                                             {...register("description")}
                                             ></textarea>
                                         <button className="bg-black text-white rounded px-4 py-2 flex items-center">
@@ -94,4 +102,4 @@ const Newcurse = () => {
     );
 };
 
-export default Newcurse;
+export default Newmodule;
