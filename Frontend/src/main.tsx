@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -9,7 +9,7 @@ import Adduser from './Pages/Admin/Adduser.tsx'
 import Worker from './Pages/Admin/Worker.tsx'
 import Newcurse from './Pages/Admin/Course/Newcurse.tsx'
 import Newmodule from './Pages/Admin/Module/Newmodule.tsx'
-import Newclass from './Pages/Admin/Newclass.tsx'
+import Newclass from './Pages/Admin/Class/Newclass.tsx'
 import Resource from './Pages/Admin/Resource.tsx'
 import Resourcelink from './Pages/Admin/Resourcelink.tsx'
 import Newproyect from './Pages/Admin/Newproyect.tsx'
@@ -29,8 +29,11 @@ createRoot(document.getElementById('root')!).render(
           <Route path="Courses" >
             <Route path="Add" element={<Newcurse />} />
           </Route>
-          <Route path="Modules">
-            <Route path=":courseId/Add" element={<Newmodule />} />
+          <Route path="Modules/:courseId">
+            <Route path="Add" element={<Newmodule />} />
+          </Route>
+          <Route path="Classes/:courseId">
+            <Route path=":moduleId/Add" element={<Newclass />} />
           </Route>
           <Route path="Worker" element={<Worker />} />
           <Route path="Newmodule" element={<Newmodule />} />
