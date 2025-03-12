@@ -1,4 +1,5 @@
 import Navbar from "./Components/NavbarProps";
+import CursosActivos from "./Components/cursos";
 
 const MisCursos = () => {
   return (
@@ -37,43 +38,14 @@ const MisCursos = () => {
       
       <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pl-12">
         <Navbar activeCourses={3} completedCourses={5} />
-        <div className="grid grid-cols-12 gap-6 mt-6 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pl-12 ">
-          {/* Contenido principal */}
-          <section className="col-span-12 lg:col-span-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-lg font-semibold text-gray-900">Cursos Activos</h2>
-              <div className="grid grid-cols-2 gap-6 mt-4">
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <img className="h-48 w-full object-cover" src="https://via.placeholder.com/600x400" alt="Curso" />
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900">Desarrollo Web Avanzado</h3>
-                <p className="mt-2 text-sm text-gray-500">75% completado</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <img className="h-48 w-full object-cover" src="https://via.placeholder.com/600x400" alt="Curso" />
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900">Introducción a Data Science</h3>
-                <p className="mt-2 text-sm text-gray-500">50% completado</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <img className="h-48 w-full object-cover" src="https://via.placeholder.com/600x400" alt="Curso" />
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900">Introducción a Data Science</h3>
-                <p className="mt-2 text-sm text-gray-500">50% completado</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <img className="h-48 w-full object-cover" src="https://via.placeholder.com/600x400" alt="Curso" />
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900">Introducción a Data Science</h3>
-                <p className="mt-2 text-sm text-gray-500">50% completado</p>
-              </div>
-            </div>
-              </div>
-            </div>
-          </section>
+        <div>
+          <CursosActivos cursos={[
+            { imagen: "https://ai-public.creatie.ai/gen_page/logo_placeholder.png", nombre: "Curso de React", progreso: 30 },
+            { imagen: "https://ai-public.creatie.ai/gen_page/logo_placeholder.png", nombre: "Curso de Vue", progreso: 60 },
+            { imagen: "https://ai-public.creatie.ai/gen_page/logo_placeholder.png", nombre: "Curso de Angular", progreso: 90 },
+            { imagen: "https://ai-public.creatie.ai/gen_page/logo_placeholder.png", nombre: "Curso de CSS", progreso: 90 }
+          ]} />
+
         </div>
       </main>
     </div>
