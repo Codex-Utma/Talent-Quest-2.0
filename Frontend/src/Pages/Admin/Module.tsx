@@ -98,7 +98,7 @@ const Module = () => {
   
           {/* Botón para agregar módulo */}
           <div className="flex justify-center">
-            <button className="bg-custom hover:bg-custom-600 text-white font-medium py-2 px-6 !rounded-button flex items-center space-x-2">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg flex items-center space-x-2">
               <i className="fas fa-plus"></i>
               <span>Agregar Nuevo Módulo</span>
             </button>

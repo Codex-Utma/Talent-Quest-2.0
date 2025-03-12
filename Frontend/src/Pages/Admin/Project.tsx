@@ -37,7 +37,7 @@ const Project = () => {
                     <h3 className="text-lg font-medium text-gray-900">{project.title}</h3>
                   </div>
                 </div>
-                <button className="rounded-md bg-custom text-white px-4 py-2 text-sm font-medium hover:bg-custom/90 flex items-center">
+                <button className="rounded-md bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-600/90 flex items-center">
                   <FaUsers className="mr-2" /> Ver Usuarios
                 </button>
               </div>
