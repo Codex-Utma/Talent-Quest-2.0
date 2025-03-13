@@ -1,6 +1,13 @@
 import { ModuleResponseType } from "../../../../types/module";
 
+import { useNavigate, useParams } from "react-router-dom";
+
 export default function ModuleRecord({ module }: { module: ModuleResponseType }) {
+
+    const navigate = useNavigate();
+
+    const { courseId } = useParams();
+
     return (
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">
@@ -15,9 +22,15 @@ export default function ModuleRecord({ module }: { module: ModuleResponseType })
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm">
                 <div className="flex space-x-3">
-                    <button className="text-custom hover:text-custom-600 !rounded-button">
-                        <i className="fas fa-eye"></i>
-                    </button>
+                    {
+                        courseId && (
+                            <button className="text-custom hover:text-custom-600 !rounded-button hover:cursor-pointer"
+                                onClick={() => navigate(`/admin/courses/${courseId}/${module.id}`)}
+                            >
+                                <i className="fas fa-eye"></i>
+                            </button>
+                        )
+                    }
                     <button className="text-green-600 hover:text-green-700 !rounded-button">
                         <i className="fas fa-edit"></i>
                     </button>
