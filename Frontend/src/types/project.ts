@@ -3,3 +3,9 @@ export interface ProjectInputType {
     description: string;
     courses: [number, ...number[]]
 }
+
+export interface ProjectListType {
+    id: number;
+    name: string;
+    isFinished: boolean;
+}

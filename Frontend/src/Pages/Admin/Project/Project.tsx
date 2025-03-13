@@ -1,6 +1,28 @@
-import { FaSearch, FaUsers, FaPlus, FaUserPlus } from "react-icons/fa";
+import { FaSearch, FaPlus, FaUserPlus } from "react-icons/fa";
+import { useState, useEffect } from "react";
+
+import { AxiosInstance } from "../../../config/axios";
+import { ProjectListType } from "../../../types/project";
+import ProjectRecord from "./Add/components/ProjectRecord";
 
 const Project = () => {
+
+  const [projects, setProjects] = useState<ProjectListType[]>([]);
+
+  useEffect(() => {
+
+    const fetchProjects = async () => {
+      try {
+        const response = await AxiosInstance.get("/admin/project");
+        setProjects(response.data.data);
+      } catch (error: any) {
+        alert(error.response.data.message);
+      }
+    }
+
+    fetchProjects();
+  }, []);
+
   return (
     <div className="bg-gray-50 min-h-screen px-4 sm:px-6 lg:px-8 py-8 max-w-8xl mx-auto">
       <nav className="bg-white shadow-sm mb-8 py-4 px-6 flex items-center justify-between">
@@ -11,7 +33,7 @@ const Project = () => {
           <img src="https://placehold.co/40x40" alt="Foto de perfil" className="w-10 h-10 rounded-full border-2 border-gray-200" />
         </div>
       </nav>
-      
+
       <div className="bg-white rounded-lg shadow">
         <div className="p-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-6">Proyectos</h1>
@@ -23,25 +45,14 @@ const Project = () => {
           </div>
 
           <div className="mt-6 space-y-4">
-            {[
-              { title: "Rediseño del Sitio Web", color: "bg-green-500" },
-              { title: "Desarrollo de App Móvil", color: "bg-red-500" },
-              { title: "Campaña de Marketing", color: "bg-green-500" },
-            ].map((project, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="flex-shrink-0">
-                    <span className={`w-3 h-3 ${project.color} rounded-full inline-block`}></span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium text-gray-900">{project.title}</h3>
-                  </div>
-                </div>
-                <button className="rounded-md bg-custom text-white px-4 py-2 text-sm font-medium hover:bg-custom/90 flex items-center">
-                  <FaUsers className="mr-2" /> Ver Usuarios
-                </button>
-              </div>
-            ))}
+            {
+              projects.length > 0 ?
+                projects.map(project => (
+                  <ProjectRecord key={project.id} project={project} />
+                ))
+                :
+                <p className="text-gray-500 text-center">No hay proyectos</p>
+            }
           </div>
         </div>
 

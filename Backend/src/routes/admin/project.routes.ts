@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createProject, finishProject, setProjectToEmployee } from "../../controllers/admin/project.controller";
+import { createProject, finishProject, getProjects, setProjectToEmployee } from "../../controllers/admin/project.controller";
 
 const router = Router();
 
@@ -13,6 +13,10 @@ router.post("/setProject", (req, res) => {
 
 router.patch("/finish/:projectId", (req, res) => {
     finishProject(req, res);
+});
+
+router.get("/", (req, res) => {
+    getProjects(req, res);
 });
 
 export default router;

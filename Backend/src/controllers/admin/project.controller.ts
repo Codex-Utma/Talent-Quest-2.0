@@ -187,8 +187,29 @@ const finishProject = async (req: Request, res: Response) => {
     }
 };
 
+const getProjects = async (req: Request, res: Response) => {
+    try {
+        const projects = await prisma.project.findMany({
+            select: {
+                id: true,
+                name: true,
+                isFinished: true,
+            }
+        });
+
+        if(projects.length === 0) {
+            return returnResponse(res, 204, "No hay proyectos");
+        }
+
+        return returnResponse(res, 200, "Proyectos encontrados", projects);
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
     createProject,
     setProjectToEmployee,
-    finishProject
+    finishProject,
+    getProjects
 }
