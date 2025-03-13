@@ -12,19 +12,19 @@ import Course from './Pages/Admin/Course/Course.tsx'
 import NewCourse from './Pages/Admin/Course/NewCourse.tsx'
 
 import Module from './Pages/Admin/Module/Module.tsx'
-import NewModule from './Pages/Admin/Module/Newmodule.tsx'
+import NewModule from './Pages/Admin/Module/NewModule.tsx'
 
 import Class from './Pages/Admin/Class/Class.tsx'
-import NewClass from './Pages/Admin/Class/Newclass.tsx'
+import NewClass from './Pages/Admin/Class/NewClass.tsx'
 
 import Resource from './Pages/Admin/Resource/Resource.tsx'
 import Resourcelink from './Pages/Admin/Resource/Newresourcelink.tsx'
 
-import AddUser from './Pages/Admin/Register/Adduser.tsx'
+import AddUser from './Pages/Admin/Register/AddUser.tsx'
 import Worker from './Pages/Admin/Worker.tsx'
-import AssignWorker from './Pages/Admin/Project/Assignworker.tsx'
+import AssignWorker from './Pages/Admin/Project/AssignWorker.tsx'
 
-import NewProject from './Pages/Admin/Project/Newproject.tsx'
+import NewProject from './Pages/Admin/Project/NewProject.tsx'
 
 import MisCursos from './Pages/User/panelUsuario.tsx'
 
