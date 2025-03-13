@@ -27,3 +27,9 @@ export interface ExternalResourceInputType {
     description: string;
     url: string;
 }
+
+export interface ResourceFileInputType {
+    name: string;
+    description: string;
+    file: File;
+}
