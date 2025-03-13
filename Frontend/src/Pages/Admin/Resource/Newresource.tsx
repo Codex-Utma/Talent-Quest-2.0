@@ -5,10 +5,10 @@ const Newresource= () => {
             {/* Navegación */}
             <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center">
-                    <img 
-                        src="https://image-resource.creatie.ai/152487613725585/152487613725587/75b3ef6bdbfeed6aa6499fc1a28b8188.png" 
-                        alt="Logo" 
-                        className="h-8 w-8" 
+                    <img
+                        src="https://image-resource.creatie.ai/152487613725585/152487613725587/75b3ef6bdbfeed6aa6499fc1a28b8188.png"
+                        alt="Logo"
+                        className="h-8 w-8"
                     />
                 </div>
             </div>
@@ -20,9 +20,9 @@ const Newresource= () => {
                     {/* Título del Recurso */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Título del Recurso</label>
-                        <input 
-                            type="text" 
-                            placeholder="Ingrese el título del recurso" 
+                        <input
+                            type="text"
+                            placeholder="Ingrese el título del recurso"
                             className="block w-full border border-gray-300 rounded-md p-2"
                         />
                     </div>
@@ -30,13 +30,13 @@ const Newresource= () => {
                     {/* Descripción */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
-                        <textarea 
-                            placeholder="Describa el recurso educativo" 
+                        <textarea
+                            placeholder="Describa el recurso educativo"
                             className="block w-full border border-gray-300 rounded-md p-2"
                         ></textarea>
                     </div>
 
-                   
+
 
                     {/* Subir Archivos */}
                     <div className="border-dashed border-2 border-gray-300 rounded-lg p-4 flex flex-col items-center">
@@ -53,7 +53,7 @@ const Newresource= () => {
 
                     {/* Botones de Guardar y Publicar */}
                     <div className="flex justify-end space-x-4">
-                        
+
                         <button className="bg-blue-600 text-white rounded-md px-4 py-2">
                             Guardar
                         </button>

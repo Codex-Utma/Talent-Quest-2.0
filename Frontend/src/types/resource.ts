@@ -21,3 +21,9 @@ export interface ResourceResponseType {
         File: ResourceFileType[];
     }
 }
+
+export interface ExternalResourceInputType {
+    name: string;
+    description: string;
+    url: string;
+}

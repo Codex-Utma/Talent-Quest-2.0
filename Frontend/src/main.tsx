@@ -27,6 +27,7 @@ import AssignWorker from './Pages/Admin/Project/AssignWorker.tsx'
 import NewProject from './Pages/Admin/Project/NewProject.tsx'
 
 import MisCursos from './Pages/User/panelUsuario.tsx'
+import Newresource from './Pages/Admin/Resource/Newresource.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -48,7 +49,8 @@ createRoot(document.getElementById('root')!).render(
               <Route path="add" element={<NewClass />} />
               <Route path=":classId">
                 <Route index element={<Resource />} />
-                <Route path="add" element={<Resourcelink />} />
+                <Route path="add/external" element={<Resourcelink />} />
+                <Route path="add/file" element={<Newresource />} />
               </Route>
             </Route>
           </Route>
