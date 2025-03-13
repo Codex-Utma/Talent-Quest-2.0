@@ -10,3 +10,8 @@ export interface CoursesType {
     description: string;
     amountClasses?: number;
 }
+
+export interface CourseProjectResponse {
+    id: number;
+    name: string;
+}

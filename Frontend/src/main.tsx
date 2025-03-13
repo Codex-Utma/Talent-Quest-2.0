@@ -24,10 +24,11 @@ import AddUser from './Pages/Admin/Register/AddUser.tsx'
 import Worker from './Pages/Admin/Worker.tsx'
 import AssignWorker from './Pages/Admin/Project/AssignWorker.tsx'
 
-import NewProject from './Pages/Admin/Project/NewProject.tsx'
+import NewProject from './Pages/Admin/Project/Add/NewProject.tsx'
 
 import MisCursos from './Pages/User/panelUsuario.tsx'
 import Newresource from './Pages/Admin/Resource/Newresource.tsx'
+import Project from './Pages/Admin/Project/Project.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -56,9 +57,13 @@ createRoot(document.getElementById('root')!).render(
           </Route>
         </Route>
 
+        <Route path="Project">
+          <Route index element={<Project />} />
+          <Route path="Newproyect" element={<NewProject />} />
+          <Route path="Assignworker" element={<AssignWorker />} />
+        </Route>
+
         <Route path="Worker" element={<Worker />} />
-        <Route path="Newproyect" element={<NewProject />} />
-        <Route path="Assignworker" element={<AssignWorker />} />
       </Route>
 
       <Route path="/employee" element={<EmployeeLayout />} >
