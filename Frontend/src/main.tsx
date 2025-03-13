@@ -14,7 +14,7 @@ import Newcurse from './Pages/Admin/Course/Newcurse.tsx'
 import Module from './Pages/Admin/Module/Module.tsx'
 import Newmodule from './Pages/Admin/Module/Newmodule.tsx'
 
-import Class from './Pages/Admin/Class.tsx'
+import Class from './Pages/Admin/Class/Class.tsx'
 import Newclass from './Pages/Admin/Class/Newclass.tsx'
 
 import Resource from './Pages/Admin/Resource.tsx'
