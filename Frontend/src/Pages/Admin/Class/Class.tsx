@@ -1,6 +1,40 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { AxiosInstance } from '../../../config/axios';
+
+import { ClassesType, ClassType } from '../../../types/class';
+import { ModuleType } from '../../../types/module';
+import ClassRecord from './components/ClassRecord';
+
 const Class = () => {
+
+    const { moduleId } = useParams();
+
+    const [moduleData, setModuleData] = useState<ModuleType>();
+    const [classes, setClasses] = useState<ClassType[]>([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await AxiosInstance.get(`/admin/class/${moduleId}`);
+                const data: ClassesType = response.data.data.module;
+                setModuleData({
+                    id: Number(data.id),
+                    name: data.name,
+                    description: data.description
+                });
+                setClasses(data.classes);
+            } catch (error: any) {
+                alert(error.response.data.message);
+            }
+        }
+
+        fetchData();
+    }, [moduleId]);
+
     return (
       <div className="bg-gray-50 min-h-screen">
         <nav className="bg-white shadow">
@@ -30,11 +64,14 @@ const Class = () => {
           </div>
         </nav>
         <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 text-left mb-2">Clases</h1>
+          <h1 className="text-3xl font-bold text-gray-900 text-left mb-2">Módulo: {moduleData?.name}</h1>
           <p className="text-gray-500 mb-8 text-left">
-            Lista de todas las clases disponibles en el sistema.
+            {moduleData?.description}
           </p>
-  
+          <p className="text-gray-500 mb-8 text-left">
+            Lista de todas las clases disponibles en el módulo.
+          </p>
+
           {/* Input de búsqueda */}
           <div className="mb-6">
             <div className="relative">
@@ -48,7 +85,7 @@ const Class = () => {
               </span>
             </div>
           </div>
-  
+
           {/* Tabla de clases */}
           <div className="bg-white shadow rounded-lg overflow-hidden mb-6">
             <table className="min-w-full divide-y divide-gray-200">
@@ -66,36 +103,24 @@ const Class = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                      Desarrollo Web Frontend
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-gray-500">
-                      Aprende HTML, CSS y JavaScript desde cero hasta nivel avanzado
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <div className="flex space-x-3">
-                      <button className="text-custom hover:text-custom-600 !rounded-button">
-                        <i className="fas fa-eye"></i>
-                      </button>
-                      <button className="text-green-600 hover:text-green-700 !rounded-button">
-                        <i className="fas fa-edit"></i>
-                      </button>
-                      <button className="text-red-600 hover:text-red-700 !rounded-button">
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {
+                                classes.length > 0 ? (
+                                  classes.map((classR) => (
+                                    <ClassRecord key={classR.id} classRecord={classR} />
+                                  ))
+                                ) : (
+                                  <tr>
+                                    <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
+                                      <div className="text-center text-gray-500">No hay cursos disponibles</div>
+                                    </td>
+                                  </tr>
+                                )
+                              }
                 {/* Repite para otros clase */}
               </tbody>
             </table>
           </div>
-  
+
           {/* Botón para agregar clase */}
           <div className="flex justify-center">
             <button className="bg-custom hover:bg-custom-600 text-white font-medium py-2 px-6 !rounded-button flex items-center space-x-2">
