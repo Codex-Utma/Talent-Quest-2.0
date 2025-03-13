@@ -11,7 +11,7 @@ import Login from './Pages/Login.tsx'
 import Course from './Pages/Admin/Course/Course.tsx'
 import Newcurse from './Pages/Admin/Course/Newcurse.tsx'
 
-import Module from './Pages/Admin/Module.tsx'
+import Module from './Pages/Admin/Module/Module.tsx'
 import Newmodule from './Pages/Admin/Module/Newmodule.tsx'
 
 import Class from './Pages/Admin/Class.tsx'

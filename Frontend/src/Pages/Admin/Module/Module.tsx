@@ -1,6 +1,40 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { AxiosInstance } from '../../../config/axios';
+
+import { ModuleResponseType, ModulesType } from '../../../types/module';
+import ModuleRecord from './components/ModuleRecord';
+import { CoursesType } from '../../../types/course';
+
 const Module = () => {
+
+    const { courseId } = useParams();
+
+    const [modules, setModules] = useState<ModuleResponseType[]>([]);
+    const [courseData, setCourseData] = useState<CoursesType>();
+
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const response = await AxiosInstance.get(`/admin/module/${courseId}`);
+          const data: ModulesType = response.data.data.course;
+          setCourseData({
+            id: data.id,
+            name: data.name,
+            description: data.description
+          });
+          setModules(data.modules);
+        } catch (error: any) {
+          alert(error.response.data.message);
+        }
+      }
+
+      fetchData();
+    }, [courseId]);
+
     return (
       <div className="bg-gray-50 min-h-screen">
         <nav className="bg-white shadow">
@@ -30,11 +64,14 @@ const Module = () => {
           </div>
         </nav>
         <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 text-left mb-2">Módulo</h1>
+          <h1 className="text-3xl font-bold text-gray-900 text-left mb-2">Curso: {courseData?.name}</h1>
           <p className="text-gray-500 mb-8 text-left">
-            Lista de todos los módulos disponibles en el sistema.
+            {courseData?.description}
           </p>
-  
+          <p className="text-gray-500 mb-8 text-left">
+            Lista de todos los módulos disponibles en el curso.
+          </p>
+
           {/* Input de búsqueda */}
           <div className="mb-6">
             <div className="relative">
@@ -48,7 +85,7 @@ const Module = () => {
               </span>
             </div>
           </div>
-  
+
           {/* Tabla de módulos */}
           <div className="bg-white shadow rounded-lg overflow-hidden mb-6">
             <table className="min-w-full divide-y divide-gray-200">
@@ -66,36 +103,24 @@ const Module = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                      Desarrollo Web Frontend
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-gray-500">
-                      Aprende HTML, CSS y JavaScript desde cero hasta nivel avanzado
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <div className="flex space-x-3">
-                      <button className="text-custom hover:text-custom-600 !rounded-button">
-                        <i className="fas fa-eye"></i>
-                      </button>
-                      <button className="text-green-600 hover:text-green-700 !rounded-button">
-                        <i className="fas fa-edit"></i>
-                      </button>
-                      <button className="text-red-600 hover:text-red-700 !rounded-button">
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {
+                                modules.length > 0 ? (
+                                  modules.map((module) => (
+                                    <ModuleRecord key={module.id} module={module} />
+                                  ))
+                                ) : (
+                                  <tr>
+                                    <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
+                                      <div className="text-center text-gray-500">No hay cursos disponibles</div>
+                                    </td>
+                                  </tr>
+                                )
+                              }
                 {/* Repite para otros módulos */}
               </tbody>
             </table>
           </div>
-  
+
           {/* Botón para agregar módulo */}
           <div className="flex justify-center">
             <button className="bg-custom hover:bg-custom-600 text-white font-medium py-2 px-6 !rounded-button flex items-center space-x-2">
@@ -107,5 +132,5 @@ const Module = () => {
       </div>
     );
   };
-  
+
   export default Module;

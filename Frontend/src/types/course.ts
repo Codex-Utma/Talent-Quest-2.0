@@ -7,5 +7,5 @@ export interface CoursesType {
     id: number;
     name: string;
     description: string;
-    amountClasses: number;
+    amountClasses?: number;
 }
