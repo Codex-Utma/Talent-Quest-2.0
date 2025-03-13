@@ -2,16 +2,6 @@
 const Resourcelink= () => {
     return (
         <div className="flex flex-col p-8 bg-transparent">
-            {/* Navegación */}
-            <div className="flex justify-between items-center mb-4">
-                <div className="flex items-center">
-                    <img 
-                        src="https://image-resource.creatie.ai/152487613725585/152487613725587/75b3ef6bdbfeed6aa6499fc1a28b8188.png" 
-                        alt="Logo" 
-                        className="h-8 w-8" 
-                    />
-                </div>
-            </div>
 
             {/* Contenido Principal */}
             <div className="py-10">

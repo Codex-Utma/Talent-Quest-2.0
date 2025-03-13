@@ -15,6 +15,7 @@ import Resourcelink from './Pages/Admin/Resourcelink.tsx'
 import Newproyect from './Pages/Admin/Newproyect.tsx'
 import Assignworker from './Pages/Admin/Assignworker.tsx'
 import MisCursos from './Pages/User/panelUsuario.tsx'
+import AdministratorPage from './Pages/Admin/AdministratorPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="Resourcelink" element={<Resourcelink />} />
         <Route path="Newproyect" element={<Newproyect />} />
         <Route path="Assignworker" element={<Assignworker />} />
+        <Route path="AdministratorPage" element={<AdministratorPage />} />
 
          
 

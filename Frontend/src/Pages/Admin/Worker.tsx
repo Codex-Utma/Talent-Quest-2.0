@@ -1,17 +1,6 @@
 const Worker = () => {
     return (
         <div className="flex flex-col gap-2 p-8 bg-transparent">
-            <header className="flex items-center justify-between p-4 bg-gray-200 text-black">
-                <div className="flex items-center">
-                    <img
-                        src="URL_DE_LA_FOTO_DEL_ADMINISTRADOR"
-                        alt="Administrador"
-                        className="w-12 h-12 rounded-full mr-4"
-                    />
-                    <h1 className="text-xl font-bold">Nombre del Administrador</h1>
-                </div>
-                <nav>{/* Enlaces de navegación */}</nav>
-            </header>
 
             <div className="flex gap-4">
                 {/* Sección de búsqueda y filtros */}
