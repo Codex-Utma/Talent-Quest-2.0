@@ -7,7 +7,7 @@ import { AxiosInstance } from "../../../config/axios";
 
 import { useParams } from "react-router-dom";
 
-const Newclass = () => {
+const NewClass = () => {
 
     const { courseId, moduleId } = useParams();
 
@@ -97,4 +97,4 @@ const Newclass = () => {
     );
 };
 
-export default Newclass;
+export default NewClass;

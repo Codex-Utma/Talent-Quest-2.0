@@ -33,7 +33,7 @@ const projects = [
 
 ];
 
-const Assignworker = () => {
+const AssignWorker = () => {
     const [formData, setFormData] = useState({ curso: "", employeeId: "" });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,4 +128,4 @@ const Assignworker = () => {
     );
 };
 
-export default Assignworker;
+export default AssignWorker;

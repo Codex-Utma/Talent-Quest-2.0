@@ -36,7 +36,7 @@ const CursoAsociado = () => {
     };
 }
 
-const Newproject = () => {
+const NewProject = () => {
     return (
         <div className="flex flex-col p-8 bg-transparent">
             {/* Navegación */}
@@ -136,4 +136,4 @@ const Newproject = () => {
     );
 };
 
-export default Newproject;
+export default NewProject;

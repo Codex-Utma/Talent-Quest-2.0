@@ -6,7 +6,7 @@ import RegisterForm from "../../../components/Admin/RegisterForm";
 import { DepartmentType } from "../../../types/department";
 import { UserTypeType } from "../../../types/userType";
 
-export default function Adduser() {
+export default function AddUser() {
 
     const [departments, setDepartments] = useState<DepartmentType[]>([]);
     const [userTypes, setUserTypes] = useState<UserTypeType[]>([]);

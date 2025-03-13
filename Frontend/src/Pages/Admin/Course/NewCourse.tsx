@@ -5,7 +5,7 @@ import { courseSchema } from "../../../schemas/course.schema";
 import { CourseType } from "../../../types/course";
 import { AxiosInstance } from "../../../config/axios";
 
-const Newcourse = () => {
+const NewCourse = () => {
 
       const { register, handleSubmit } = useForm<CourseType>({
         resolver: zodResolver(courseSchema),
@@ -92,4 +92,4 @@ const Newcourse = () => {
     );
 };
 
-export default Newcourse;
+export default NewCourse;
