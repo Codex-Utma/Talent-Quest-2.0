@@ -1,6 +1,27 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+import { useState, useEffect } from 'react';
+import { AxiosInstance } from '../../../config/axios';
+import { CoursesType } from '../../../types/course';
+import CourseRecord from './components/CourseRecord';
+
 const Course = () => {
+
+  const [courses, setCourses] = useState<CoursesType[]>([]);
+
+  useEffect(() => {
+    const getCourses = async () => {
+      try {
+        const response = await AxiosInstance.get('/admin/course');
+        setCourses(response.data.data);
+      } catch (error: any) {
+        alert(error.response.data.message);
+      }
+    };
+
+    getCourses();
+  }, []);
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <nav className="bg-white shadow">
@@ -66,32 +87,19 @@ const Course = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              <tr>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">
-                    Desarrollo Web Frontend
-                  </div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-sm text-gray-500">
-                    Aprende HTML, CSS y JavaScript desde cero hasta nivel avanzado
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">
-                  <div className="flex space-x-3">
-                    <button className="text-custom hover:text-custom-600 !rounded-button">
-                      <i className="fas fa-eye"></i>
-                    </button>
-                    <button className="text-green-600 hover:text-green-700 !rounded-button">
-                      <i className="fas fa-edit"></i>
-                    </button>
-                    <button className="text-red-600 hover:text-red-700 !rounded-button">
-                      <i className="fas fa-trash"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              {/* Repite para otros cursos */}
+              {
+                courses.length > 0 ? (
+                  courses.map((course) => (
+                    <CourseRecord key={course.id} course={course} />
+                  ))
+                ) : (
+                  <tr>
+                    <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
+                      <div className="text-center text-gray-500">No hay cursos disponibles</div>
+                    </td>
+                  </tr>
+                )
+              }
             </tbody>
           </table>
         </div>

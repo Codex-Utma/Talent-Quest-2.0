@@ -8,7 +8,7 @@ import EmployeeLayout from './layout/EmployeeLayout.tsx'
 
 import Login from './Pages/Login.tsx'
 
-import Course from './Pages/Admin/Course.tsx'
+import Course from './Pages/Admin/Course/Course.tsx'
 import Newcurse from './Pages/Admin/Course/Newcurse.tsx'
 
 import Module from './Pages/Admin/Module.tsx'
