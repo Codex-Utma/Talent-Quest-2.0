@@ -17,14 +17,14 @@ import Newmodule from './Pages/Admin/Module/Newmodule.tsx'
 import Class from './Pages/Admin/Class/Class.tsx'
 import Newclass from './Pages/Admin/Class/Newclass.tsx'
 
-import Resource from './Pages/Admin/Resource.tsx'
-import Resourcelink from './Pages/Admin/Newresourcelink.tsx'
+import Resource from './Pages/Admin/Resource/Resource.tsx'
+import Resourcelink from './Pages/Admin/Resource/Newresourcelink.tsx'
 
-import Newworker from './Pages/Admin/Newworker.tsx'
+import Newworker from './Pages/Admin/Register/Newworker.tsx'
 import Worker from './Pages/Admin/Worker.tsx'
-import Assignworker from './Pages/Admin/Assignworker.tsx'
+import Assignworker from './Pages/Admin/Project/Assignworker.tsx'
 
-import Newproyect from './Pages/Admin/Newproject.tsx'
+import Newproyect from './Pages/Admin/Project/Newproject.tsx'
 
 import MisCursos from './Pages/User/panelUsuario.tsx'
 

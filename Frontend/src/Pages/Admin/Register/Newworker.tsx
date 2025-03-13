@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { AxiosInstance } from "../../config/axios";
+import { AxiosInstance } from "../../../config/axios";
 
-import RegisterForm from "../../components/Admin/RegisterForm";
-import { DepartmentType } from "../../types/department";
-import { UserTypeType } from "../../types/userType";
+import RegisterForm from "../../../components/Admin/RegisterForm";
+import { DepartmentType } from "../../../types/department";
+import { UserTypeType } from "../../../types/userType";
 
 export default function Adduser() {
 
