@@ -5,8 +5,6 @@ import { courseSchema } from "../../../schemas/course.schema";
 import { CourseType } from "../../../types/course";
 import { AxiosInstance } from "../../../config/axios";
 
-// import { AxiosInstance } from "../config/axios";
-
 const Newcourse = () => {
 
       const { register, handleSubmit } = useForm<CourseType>({
