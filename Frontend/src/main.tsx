@@ -57,10 +57,10 @@ createRoot(document.getElementById('root')!).render(
           </Route>
         </Route>
 
-        <Route path="Project">
+        <Route path="project">
           <Route index element={<Project />} />
-          <Route path="Newproyect" element={<NewProject />} />
-          <Route path="Assignworker" element={<AssignWorker />} />
+          <Route path="newProject" element={<NewProject />} />
+          <Route path="assignWorker" element={<AssignWorker />} />
         </Route>
 
         <Route path="Worker" element={<Worker />} />
