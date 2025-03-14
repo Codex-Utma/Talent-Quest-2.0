@@ -5,6 +5,12 @@ export interface ExternalResourceType {
     url: string;
 }
 
+export interface FileResourceType {
+    id: number;
+    name: string;
+    description: string;
+}
+
 export interface ResourceFileType {
     id: number;
     name: string;

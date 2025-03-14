@@ -1,19 +1,21 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { AxiosInstance } from '../../../config/axios';
-import { ExternalResourceType, ResourceResponseType } from '../../../types/resource';
+import { ExternalResourceType, FileResourceType, ResourceResponseType } from '../../../types/resource';
 import { ClassType } from '../../../types/class';
-import ExternalResourceRecord from './components/ResourceRecord';
+import { ExternalResourceRecord, FileResourceRecord } from './components/ResourceRecord';
 
 const Resource = () => {
 
-  const { classId } = useParams();
+  const { classId, moduleId, courseId } = useParams();
+  const navigate = useNavigate();
 
   const [classData, setClassData] = useState<ClassType>({} as ClassType);
   const [externalResources, setExternalResources] = useState<ExternalResourceType[]>([]);
+  const [fileResources, setFileResources] = useState<FileResourceType[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,13 +23,14 @@ const Resource = () => {
         const response = await AxiosInstance.get(`/admin/resource/all/${classId}`);
         console.log(response.data.data);
         const data: ResourceResponseType = response.data.data;
+        console.log(data.resources.File);
         setClassData({
           id: Number(data.id),
           name: data.name,
           description: data.description
         });
         setExternalResources(data.resources.External);
-
+        setFileResources(data.resources.File);
       } catch (error: any) {
         alert(error.response.data.message);
       }
@@ -44,6 +47,20 @@ const Resource = () => {
         <p className="text-gray-500 mb-8 text-left">
           Lista de todos los recursos disponibles en la clase.
         </p>
+
+        <div className='space-x-4'>
+          <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+            onClick={() => navigate(`/admin/courses/${courseId}/${moduleId}/${classId}/add/external`)}>
+            <i className="fas fa-user-plus mr-2"></i>
+            Nuevo Recurso (externo)
+          </button>
+          <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+            onClick={() => navigate(`/admin/courses/${courseId}/${moduleId}/${classId}/add/file`)}>
+            <i className="fas fa-user-plus mr-2"></i>
+            Nuevo Recurso (archivo)
+          </button>
+        </div>
+
 
         {/* Input de búsqueda */}
         <div className="mb-6">
@@ -77,10 +94,15 @@ const Resource = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {
-                externalResources.length > 0 ? (
-                  externalResources.map((resource) => (
-                    <ExternalResourceRecord key={resource.id} resource={resource} />
-                  ))
+                externalResources.length > 0 || fileResources.length > 0 ? (
+                  <>
+                    {externalResources.map((resource) => (
+                      <ExternalResourceRecord key={resource.id} resource={resource} />
+                    ))}
+                    {fileResources.map((resource) => (
+                      <FileResourceRecord key={resource.id} resource={resource} />
+                    ))}
+                  </>
                 ) : (
                   <tr>
                     <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
@@ -89,7 +111,6 @@ const Resource = () => {
                   </tr>
                 )
               }
-              {/* Repite para otros clase */}
             </tbody>
           </table>
         </div>

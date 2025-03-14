@@ -4,11 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ResourceFileInputType } from "../../../types/resource";
 import { fileResourceSchema } from "../../../schemas/fileResource.schema";
 import { AxiosInstance } from "../../../config/axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const NewResource = () => {
 
     const { courseId, moduleId, classId } = useParams();
+    const navigate = useNavigate();
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -42,6 +43,7 @@ const NewResource = () => {
             });
 
             alert(response.data.message);
+            navigate(`/admin/courses/${courseId}/${moduleId}/${classId}`);
         } catch (error: any) {
             alert(error.response.data.message);
         }

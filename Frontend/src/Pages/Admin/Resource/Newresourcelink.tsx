@@ -3,13 +3,14 @@ import { ExternalResourceInputType } from "../../../types/resource";
 
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { AxiosInstance } from "../../../config/axios";
 
 const Newresourcelink= () => {
 
     const { courseId, moduleId, classId } = useParams();
+    const navigate = useNavigate();
 
     const { register, handleSubmit } = useForm<ExternalResourceInputType>({
         resolver: zodResolver(externalResourceSchema),
@@ -24,6 +25,7 @@ const Newresourcelink= () => {
                 classId,
             });
             alert(response.data.message);
+            navigate(`/admin/courses/${courseId}/${moduleId}/${classId}`);
         } catch (error: any) {
             alert(error.response.data.message);
         }
