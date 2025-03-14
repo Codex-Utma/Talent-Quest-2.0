@@ -32,7 +32,6 @@ const Kardex: React.FC = () => {
       <div className="container mx-auto p-4">
         <div className="bg-white rounded-lg shadow p-6 mb-4">
           <div className="flex items-center">
-            <img src="/profile.jpg" alt="Profile" className="w-16 h-16 rounded-full mr-4" />
             <div>
               <h2 className="text-xl font-semibold">Carlos Rodríguez Martínez</h2>
               <p className="text-gray-600">
