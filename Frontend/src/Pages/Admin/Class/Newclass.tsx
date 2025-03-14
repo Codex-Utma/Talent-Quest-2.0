@@ -5,11 +5,12 @@ import { classSchema } from "../../../schemas/class.schema";
 import { ClassType } from "../../../types/class";
 import { AxiosInstance } from "../../../config/axios";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const NewClass = () => {
 
     const { courseId, moduleId } = useParams();
+    const navigate = useNavigate();
 
     const { register, handleSubmit } = useForm<ClassType>({
         resolver: zodResolver(classSchema),
@@ -23,6 +24,7 @@ const NewClass = () => {
                 courseId,
             });
             alert(response.data.message);
+            navigate(`/admin/courses/${courseId}/${moduleId}`);
         } catch (error: any) {
             alert(error.response.data.message);
         }
