@@ -6,6 +6,7 @@ import fileupload from 'express-fileupload';
 
 import userRouter from './routes/user.routes'
 import adminRouter from './routes/admin.routes'
+import employeeRouter from './routes/employee.routes'
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(fileupload({
 
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/employee', employeeRouter);
 
 const PORT = process.env.PORT || 4000;
 
