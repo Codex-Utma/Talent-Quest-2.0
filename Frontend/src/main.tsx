@@ -25,7 +25,7 @@ import AssignWorker from './Pages/Admin/Project/Assignworker.tsx'
 
 import NewProject from './Pages/Admin/Project/Add/NewProject.tsx'
 
-import MisCursos from './Pages/User/panelUsuario.tsx'
+import MisCursos from './Pages/User/Main.tsx'
 import Newresource from './Pages/Admin/Resource/Newresource.tsx'
 import Project from './Pages/Admin/Project/Project.tsx'
 
@@ -68,7 +68,7 @@ createRoot(document.getElementById('root')!).render(
       </Route>
 
       <Route path="/employee" element={<EmployeeLayout />} >
-        <Route path="PanelUsuario" element={<MisCursos />} />
+        <Route index element={<MisCursos />} />
       </Route>
 
     </Routes>
