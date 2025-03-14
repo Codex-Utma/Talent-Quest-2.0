@@ -30,6 +30,7 @@ const getDashboardInfo = async (req: Request, res: Response) => {
             select: {
                 Course: {
                     select: {
+                        id: true,
                         name: true,
                     }
                 },
