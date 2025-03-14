@@ -1,7 +1,11 @@
 import React from 'react';
 import * as echarts from 'echarts';
+import { useNavigate } from 'react-router-dom';
 
 const AdministratorPage: React.FC = () => {
+
+    const navigate = useNavigate();
+
     React.useEffect(() => {
         // Department Progress Chart
         const departmentChart = echarts.init(document.getElementById('departmentChart') as HTMLElement);
@@ -89,16 +93,22 @@ const AdministratorPage: React.FC = () => {
                     {/* Quick Actions */}
                     <div className="mb-8">
                         <div className="flex space-x-4">
-                        <button className="bg-blue-600 text-white rounded-md px-4 py-2">
-                        <i className="fas fa-user-plus mr-2"></i>
+                            <button className="bg-blue-600 text-white rounded-md px-4 py-2"
+                                onClick={() => navigate('/admin/register')}
+                            >
+                                <i className="fas fa-user-plus mr-2"></i>
                                 Nuevo Trabajador
                             </button>
-                            <button className="bg-blue-600 text-white rounded-md px-4 py-2">
-                            <i className="fas fa-user-plus mr-2"></i>
+                            <button className="bg-blue-600 text-white rounded-md px-4 py-2"
+                                onClick={() => navigate('/admin/project/newProject')}
+                            >
+                                <i className="fas fa-user-plus mr-2"></i>
                                 Crear Proyecto
                             </button>
-                            <button className="bg-blue-600 text-white rounded-md px-4 py-2">
-                            <i className="fas fa-file-alt mr-2"></i>
+                            <button className="bg-blue-600 text-white rounded-md px-4 py-2"
+                                onClick={() => navigate('/admin/project/assignWorker')}
+                            >
+                                <i className="fas fa-file-alt mr-2"></i>
                                 Asignar Trabajador
                             </button>
                         </div>
@@ -132,42 +142,42 @@ const AdministratorPage: React.FC = () => {
                 {/* Charts */}
 
                 <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
-    {[
-        { title: "Progreso por Departamento", id: "departmentChart" },
-        { title: "Completación de Cursos", id: "completionChart" },
-    ].map((chart, index) => (
-        <div key={index} className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">{chart.title}</h3>
-            {chart.id === "departmentChart" && (
-                <div className="mb-4">
-                    <label htmlFor="filterDepartment" className="block text-sm font-medium text-gray-700">
-                        Filtrar Departamento
-                    </label>
-                    <input
-                        type="text"
-                        id="filterDepartment"
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                        placeholder="Ingrese departamento"
-                    />
+                    {[
+                        { title: "Progreso por Departamento", id: "departmentChart" },
+                        { title: "Completación de Cursos", id: "completionChart" },
+                    ].map((chart, index) => (
+                        <div key={index} className="bg-white shadow rounded-lg p-6">
+                            <h3 className="text-lg font-medium text-gray-900 mb-4">{chart.title}</h3>
+                            {chart.id === "departmentChart" && (
+                                <div className="mb-4">
+                                    <label htmlFor="filterDepartment" className="block text-sm font-medium text-gray-700">
+                                        Filtrar Departamento
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="filterDepartment"
+                                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                        placeholder="Ingrese departamento"
+                                    />
+                                </div>
+                            )}
+                            {chart.id === "completionChart" && (
+                                <div className="mb-4">
+                                    <label htmlFor="filterCompletion" className="block text-sm font-medium text-gray-700">
+                                        Filtrar Completación
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="filterCompletion"
+                                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                                        placeholder="Ingrese completación"
+                                    />
+                                </div>
+                            )}
+                            <div id={chart.id} style={{ height: "300px" }}></div>
+                        </div>
+                    ))}
                 </div>
-            )}
-            {chart.id === "completionChart" && (
-                <div className="mb-4">
-                    <label htmlFor="filterCompletion" className="block text-sm font-medium text-gray-700">
-                        Filtrar Completación
-                    </label>
-                    <input
-                        type="text"
-                        id="filterCompletion"
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                        placeholder="Ingrese completación"
-                    />
-                </div>
-            )}
-            <div id={chart.id} style={{ height: "300px" }}></div>
-        </div>
-    ))}
-</div>
 
 
                 {/* Recent Activity */}
