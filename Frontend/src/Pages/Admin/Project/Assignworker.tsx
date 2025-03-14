@@ -1,12 +1,11 @@
 import { assignProjectSchema } from "../../../schemas/assignProject.schema";
 import { AssignProjectType } from "../../../types/project";
 
-// import { AxiosInstance } from "../../../config/axios";
-
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputProject from "./components/InputProject";
 import InputUser from "./components/InputUser";
+import { AxiosInstance } from "../../../config/axios";
 
 const AssignWorker = () => {
 
@@ -16,11 +15,11 @@ const AssignWorker = () => {
 
     const onSuccess = async (data: AssignProjectType) => {
         try {
-            // const response = await AxiosInstance.post(`/admin/project/assign`, {
-            //     ...data,
-            // });
-            // alert(response.data.message);
-            console.log(data);
+            const response = await AxiosInstance.post(`/admin/project/setProject`, {
+                projectId: data.projectId,
+                employeeId: data.userId
+            });
+            alert(response.data.message);
         } catch (error: any) {
             alert(error.response.data.message);
         }

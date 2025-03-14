@@ -45,7 +45,7 @@ export default function InputProject({ register }: InputProjectProps) {
 
     const handleSelectProject = (selected: ProjectResponseType) => {
         setSelectedProject(selected);
-        register("projectId", { value: String(selected.id) });
+        register("projectId", { value: selected.id });
         setProjectName(selected.name);
         setProjects([]);
     }
