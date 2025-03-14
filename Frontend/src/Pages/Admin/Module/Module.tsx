@@ -37,32 +37,6 @@ const Module = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <nav className="bg-white shadow">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex-shrink-0 flex items-center">
-              <img
-                className="h-8 w-auto"
-                src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png"
-                alt="Logo"
-              />
-            </div>
-            <div className="flex items-center">
-              <div className="relative">
-                <button className="flex items-center space-x-3">
-                  <img
-                    className="h-9 w-9 rounded-full object-cover"
-                    src="https://creatie.ai/ai/api/search-image?query=A professional..."
-                    alt="Usuario"
-                  />
-                  <span className="text-gray-700 font-medium">Admin</span>
-                  <i className="fas fa-chevron-down text-gray-400 text-sm"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
       <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold text-gray-900 text-left mb-2">Módulo: {courseData?.name}</h1>
         <p className="text-gray-500 mb-8 text-left">

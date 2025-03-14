@@ -12,23 +12,24 @@ import Course from './Pages/Admin/Course/Course.tsx'
 import NewCourse from './Pages/Admin/Course/NewCourse.tsx'
 
 import Module from './Pages/Admin/Module/Module.tsx'
-import NewModule from './Pages/Admin/Module/NewModule.tsx'
+import NewModule from './Pages/Admin/Module/Newmodule.tsx'
 
 import Class from './Pages/Admin/Class/Class.tsx'
-import NewClass from './Pages/Admin/Class/NewClass.tsx'
+import NewClass from './Pages/Admin/Class/Newclass.tsx'
 
 import Resource from './Pages/Admin/Resource/Resource.tsx'
 import Resourcelink from './Pages/Admin/Resource/Newresourcelink.tsx'
 
 import AddUser from './Pages/Admin/Register/AddUser.tsx'
-import Worker from './Pages/Admin/Worker.tsx'
-import AssignWorker from './Pages/Admin/Project/AssignWorker.tsx'
+import AssignWorker from './Pages/Admin/Project/Assignworker.tsx'
 
 import NewProject from './Pages/Admin/Project/Add/NewProject.tsx'
 
 import MisCursos from './Pages/User/panelUsuario.tsx'
 import Newresource from './Pages/Admin/Resource/Newresource.tsx'
 import Project from './Pages/Admin/Project/Project.tsx'
+
+import AdministratorPage from './Pages/Admin/Main.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -37,6 +38,7 @@ createRoot(document.getElementById('root')!).render(
       <Route index element={<Login />} />
 
       <Route path="/admin" element={<AdminLayout />} >
+        <Route index element={<AdministratorPage />} />
         <Route path="Register" element={<AddUser />} />
 
         <Route path="courses">
@@ -63,7 +65,6 @@ createRoot(document.getElementById('root')!).render(
           <Route path="assignWorker" element={<AssignWorker />} />
         </Route>
 
-        <Route path="Worker" element={<Worker />} />
       </Route>
 
       <Route path="/employee" element={<EmployeeLayout />} >
