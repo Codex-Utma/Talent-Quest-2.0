@@ -5,6 +5,9 @@ import returnResponse from "../../utils/auto/httpResponse";
 
 import { UploadedFile } from "express-fileupload";
 
+import path from "path";
+import fs from "fs";
+
 const prisma = new PrismaClient();
 
 const createResourceFile = async (req: Request, res: Response) => {
@@ -239,8 +242,48 @@ const getResourcesByClass = async (req: Request, res: Response) => {
     }
 };
 
+const getFileResource = async (req: Request, res: Response) => {
+    try {
+        const { resourceId } = req.params;
+
+        if(!resourceId) {
+            return returnResponse(res, 400, "El id del recurso es requerido");
+        }
+
+        const resource = await prisma.resource.findFirst({
+            where: {
+                id: Number(resourceId)
+            },
+            select: {
+                url: true
+            }
+        });
+
+        if(resource === null) {
+            return returnResponse(res, 404, "Recurso no encontrado");
+        }
+
+        const uploadsDir = path.join(__dirname, '../../..');
+        const file = path.join(uploadsDir, resource.url);
+
+        if(!fs.existsSync(file)) {
+            return returnResponse(res, 404, "Archivo no encontrado");
+        }
+
+        res.download(file, (err) => {
+            if (err) {
+                return returnResponse(res, 500, "Error al descargar el archivo");
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
     createResourceFile,
     createResourceLink,
-    getResourcesByClass
+    getResourcesByClass,
+    getFileResource
 }
