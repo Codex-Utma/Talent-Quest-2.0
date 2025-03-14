@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 import { AxiosInstance } from '../../../config/axios';
 import { CoursesType } from '../../../types/course';
 import CourseRecord from './components/CourseRecord';
+import { useNavigate } from 'react-router-dom';
 
 const Course = () => {
+
+  const navigate = useNavigate();
 
   const [courses, setCourses] = useState<CoursesType[]>([]);
 
@@ -29,6 +32,12 @@ const Course = () => {
         <p className="text-gray-500 mb-8 text-left">
           Lista de todos los cursos disponibles en el sistema.
         </p>
+        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+          onClick={() => navigate('/admin/courses/add')}
+        >
+          <i className="fas fa-user-plus mr-2"></i>
+          Nuevo Curso
+        </button>
 
         {/* Input de búsqueda */}
         <div className="mb-6">

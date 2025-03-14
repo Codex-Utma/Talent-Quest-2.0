@@ -4,8 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { courseSchema } from "../../../schemas/course.schema";
 import { CourseType } from "../../../types/course";
 import { AxiosInstance } from "../../../config/axios";
+import { useNavigate } from "react-router-dom";
 
 const NewCourse = () => {
+
+    const navigate = useNavigate();
 
       const { register, handleSubmit } = useForm<CourseType>({
         resolver: zodResolver(courseSchema),
@@ -15,6 +18,7 @@ const NewCourse = () => {
         try {
             const response = await AxiosInstance.post("/admin/course", data);
             alert(response.data?.message);
+            navigate('/admin/courses');
         } catch (error: any) {
             alert(error.response.data.message);
         }
