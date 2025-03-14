@@ -80,30 +80,8 @@ const AdministratorPage: React.FC = () => {
 
     return (
         <div className="bg-gray-50 min-h-screen flex">
-            {/* Sidebar */}
-            <aside className="w-64 bg-white shadow-lg fixed h-full">
 
-                <nav className="mt-6">
-                    <a href="#" className="flex items-center px-6 py-3 text-custom bg-blue-50">
-                        <i className="fas fa-chart-line w-5 h-5 mr-3"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="#" className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50">
-                        <i className="fas fa-users w-5 h-5 mr-3"></i>
-                        <span>Trabajadores</span>
-                    </a>
-                    <a href="#" className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50">
-                        <i className="fas fa-graduation-cap w-5 h-5 mr-3"></i>
-                        <span>Cursos</span>
-                    </a>
-                    <a href="#" className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50">
-                        <i className="fas fa-chart-bar w-5 h-5 mr-3"></i>
-                        <span>Proyectos</span>
-                    </a>
-                </nav>
-            </aside>
-
-            <div className="flex-1 ml-64">
+            <div className="flex-1">
 
                 {/* Top Navigation */}
                 {/* Main Content */}
