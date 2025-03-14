@@ -120,7 +120,7 @@ const setProjectToEmployee = async (req: Request, res: Response) => {
                     }
                 })
             })
-            return returnResponse(res, 200, "El empleado no ha completado los cursos necesarios y se le han asignado");
+            return returnResponse(res, 406, "El empleado no tiene los cursos necesarios y han sido asignados");
         };
 
         await prisma.user.update({
