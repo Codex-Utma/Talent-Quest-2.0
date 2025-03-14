@@ -9,6 +9,7 @@ export interface FileResourceType {
     id: number;
     name: string;
     description: string;
+    extension: string;
 }
 
 export interface ResourceFileType {
