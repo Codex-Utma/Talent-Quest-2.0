@@ -9,3 +9,13 @@ export interface ProjectListType {
     name: string;
     isFinished: boolean;
 }
+
+export interface AssignProjectType {
+    projectId: string;
+    userId: string;
+}
+
+export interface ProjectResponseType {
+    id: number;
+    name: string;
+}

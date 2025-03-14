@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import { AxiosInstance } from "../../../config/axios";
 import { ProjectListType } from "../../../types/project";
-import ProjectRecord from "./Add/components/ProjectRecord";
+import ProjectRecord from "./components/ProjectRecord";
 
 import { useNavigate } from "react-router-dom";
 

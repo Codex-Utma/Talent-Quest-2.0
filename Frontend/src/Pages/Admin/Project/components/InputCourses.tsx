@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import debounce from "just-debounce-it";
-import { AxiosInstance } from "../../../../../config/axios";
-import { CourseProjectResponse } from "../../../../../types/course";
+import { AxiosInstance } from "../../../../config/axios";
+import { CourseProjectResponse } from "../../../../types/course";
 import { UseFormRegister } from "react-hook-form";
-import { ProjectInputType } from "../../../../../types/project";
+import { ProjectInputType } from "../../../../types/project";
 
 export default function InputCourses({ register }: { register: UseFormRegister<ProjectInputType> }) {
     const [course, setCourse] = useState<string>("");

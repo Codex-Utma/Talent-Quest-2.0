@@ -1,4 +1,4 @@
-import InputCourses from "./components/InputCourses";
+import InputCourses from "../components/InputCourses";
 
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
