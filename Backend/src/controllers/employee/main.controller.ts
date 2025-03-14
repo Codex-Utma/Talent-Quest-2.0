@@ -50,6 +50,77 @@ const getDashboardInfo = async (req: Request, res: Response) => {
     }
 };
 
+const getKardexData = async (req: Request, res: Response) => {
+    try {
+        const currentUser: User = req.body.user;
+
+        const insignias = await prisma.userInsignia.findMany({
+            where: {
+                userId: currentUser.id
+            },
+            select: {
+                Insignia: {
+                    select: {
+                        id: true,
+                        name: true
+                    }
+                }
+            }
+        });
+
+        const projects = await prisma.projectAssigned.findMany({
+            where: {
+                AND: [
+                    {
+                        userId: currentUser.id
+                    },
+                    {
+                        Project: {
+                            isFinished: true
+                        }
+                    }
+                ]
+            },
+            select: {
+                Project: {
+                    select: {
+                        id: true,
+                        name: true
+                    }
+                }
+            }
+        });
+
+        const certifications = await prisma.certificationUser.findMany({
+            where: {
+                userId: currentUser.id
+            },
+            select: {
+                Certification: {
+                    select: {
+                        id: true,
+                        name: true,
+                        description: true,
+                        createdAt: true
+                    }
+                }
+            }
+        });
+
+        const response = {
+            insignias,
+            projects,
+            certifications,
+            currentUser
+        }
+
+        return returnResponse(res, 200, "Información del kardex", response);
+    } catch {
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
-    getDashboardInfo
+    getDashboardInfo,
+    getKardexData
 }
