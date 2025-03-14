@@ -1,36 +1,12 @@
-import React from 'react';
-
-const Proyecto = () => {
+const EmployeeProject = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar (Asumiendo que tienes una barra de navegación similar) */}
-      <aside className="w-64 bg-white shadow-md p-4">
-        {/* Aquí puedes agregar tu barra de navegación */}
-        <nav>
-          <ul>
-            <li className="mb-2">
-              <a href="#" className="flex items-center text-sm text-gray-700 hover:text-blue-600">
-                Cursos
-              </a>
-            </li>
-            <li className="mb-2">
-              <a href="#" className="flex items-center text-sm text-gray-700 hover:text-blue-600">
-                Proyectos
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
 
       {/* Main Content */}
       <main className="flex-1 p-8">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-semibold">Desarrollo de Sistema de Gestión Empresarial</h1>
-          <img
-            src="URL_DEL_AVATAR" // Reemplaza con la URL de tu avatar
-            alt="Avatar"
-            className="w-10 h-10 rounded-full"
-          />
         </div>
 
         <p className="text-gray-600 mb-6">Código del proyecto: PRJ-2024-001</p>
@@ -121,4 +97,4 @@ const Proyecto = () => {
   );
 };
 
-export default Proyecto;
+export default EmployeeProject;
