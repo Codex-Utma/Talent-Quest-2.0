@@ -95,11 +95,11 @@ const getCoursesByName = async (req: Request, res: Response) => {
     }
 };
 
-const getAvailableEmployeesByName = async (req: Request, res: Response) => {
+const getAvailableEmployeesById = async (req: Request, res: Response) => {
     try {
-        const name = req.query.name;
+        const id = req.query.id;
 
-        if (!name) {
+        if (!id) {
             return returnResponse(res, 400, "Faltan campos por completar");
         }
 
@@ -107,8 +107,8 @@ const getAvailableEmployeesByName = async (req: Request, res: Response) => {
             where: {
                 AND: [
                     {
-                        name: {
-                            contains: name.toString()
+                        id: {
+                            contains: id.toString()
                         }
                     },
                     {
@@ -141,5 +141,5 @@ export {
     getRegisterFormData,
     getProjectsByName,
     getCoursesByName,
-    getAvailableEmployeesByName
+    getAvailableEmployeesById
 }
