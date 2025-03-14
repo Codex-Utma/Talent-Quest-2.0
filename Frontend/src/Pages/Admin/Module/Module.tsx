@@ -1,7 +1,7 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { AxiosInstance } from '../../../config/axios';
 
@@ -10,6 +10,8 @@ import ModuleRecord from './components/ModuleRecord';
 import { CoursesType } from '../../../types/course';
 
 const Module = () => {
+
+  const navigate = useNavigate();
 
   const { courseId } = useParams();
 
@@ -45,6 +47,12 @@ const Module = () => {
         <p className="text-gray-500 mb-8 text-left">
           Lista de todos los módulos disponibles en el curso.
         </p>
+
+        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+          onClick={() => navigate(`/admin/courses/${courseId}/add`)}>
+          <i className="fas fa-user-plus mr-2"></i>
+          Nuevo Módulo
+        </button>
 
         {/* Input de búsqueda */}
         <div className="mb-6">
