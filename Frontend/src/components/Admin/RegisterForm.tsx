@@ -7,8 +7,11 @@ import { RegisterType } from "../../types/register";
 import registerSchema from "../../schemas/register.schema";
 import { DepartmentType } from "../../types/department";
 import { UserTypeType } from "../../types/userType";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm({departments, userTypes}: {departments: DepartmentType[], userTypes: UserTypeType[]}) {
+
+    const navigate = useNavigate();
 
     const { register, handleSubmit } = useForm<RegisterType>({
         resolver: zodResolver(registerSchema),
@@ -26,6 +29,7 @@ export default function RegisterForm({departments, userTypes}: {departments: Dep
                 userTypeId: data.userTypeId,
             });
             alert(response.data.message);
+            navigate("/admin");
         } catch (error: any) {
             alert(error.response.data.message);
         }
