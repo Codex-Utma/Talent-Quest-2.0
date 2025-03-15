@@ -3,7 +3,7 @@ import { getDashboardInfo, getKardexData } from "../controllers/employee/main.co
 import authMiddleware from "../utils/helpers/authMiddleware";
 
 import moduleRouter from "./employee/course.routes";
-import classRouter from "./employee/class.routes";
+import classRouter from "./employee/module.routes";
 
 const router = Router();
 
