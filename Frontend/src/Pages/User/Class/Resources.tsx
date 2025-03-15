@@ -71,8 +71,13 @@ export default function ResourcesFromClass() {
             </div>
           </div>
         ) : null}
+
+        {/* Marcar como completado */}
+        <div className="mt-6 flex justify-end">
+          <MarkAsCompleted />
+        </div>
       </div>
-      <MarkAsCompleted />
     </div>
   );
+
 }

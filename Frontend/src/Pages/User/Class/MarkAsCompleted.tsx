@@ -23,10 +23,10 @@ export default function MarkAsCompleted() {
 
     return (
         <button
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 font-semibold"
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 font-semibold hover:cursor-pointer"
         onClick={handleMarkAsCompleted}
       >
-        Marcar como completado
+        Marcar como completada
       </button>
     )
 }
