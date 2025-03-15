@@ -4,6 +4,7 @@ import { AxiosInstance } from "../../../config/axios";
 import { useParams } from "react-router-dom";
 import CustomLinkResource from "./CustomLinkResource";
 import CustomFileResource from "./CustomFileResource";
+import MarkAsCompleted from "./MarkAsCompleted";
 
 export default function ResourcesFromClass() {
   const { classId } = useParams<{ classId: string }>();
@@ -57,10 +58,10 @@ export default function ResourcesFromClass() {
               ))}
             </div>
           </div>
-        ): null}
+        ) : null}
 
         {/* Archivos */}
-        { classData.resources.File && classData.resources.File.length > 0 ?(
+        {classData.resources.File && classData.resources.File.length > 0 ? (
           <div className="mt-6">
             <h2 className="text-2xl font-semibold text-green-600">Archivos</h2>
             <div className="mt-4 space-y-4">
@@ -69,8 +70,9 @@ export default function ResourcesFromClass() {
               ))}
             </div>
           </div>
-        ): null}
+        ) : null}
       </div>
+      <MarkAsCompleted />
     </div>
   );
 }
