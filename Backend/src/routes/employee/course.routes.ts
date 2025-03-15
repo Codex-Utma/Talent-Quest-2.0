@@ -4,7 +4,7 @@ import { getModules } from "../../controllers/admin/module.controller";
 const router = Router();
 
 router.get("/:courseId", (req, res) => {
-    getModules
+    getModules(req, res)
 });
 
 export default router;

@@ -23,7 +23,7 @@ router.get("/resources/:classId", (req, res) => {
     getResourcesByClass(req, res);
 });
 
-router.get("/resource/file/:resourceId", (req, res) => {
+router.get("/resources/file/:resourceId", (req, res) => {
     getFileResource(req, res);
 });
 
