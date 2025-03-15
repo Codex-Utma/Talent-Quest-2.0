@@ -15,7 +15,7 @@ const getDashboardAdmin = async (req: Request, res: Response) => {
             }
         });
 
-        const totalCourses = await prisma.course.count();
+        const totalCourses = await prisma.progress.count();
 
         const totalCoursesFinished = await prisma.progress.count({
             where: {
@@ -38,7 +38,7 @@ const getDashboardAdmin = async (req: Request, res: Response) => {
             }
         });
 
-        const percentageCoursesFinished = (totalCoursesFinished / totalCourses) * 100;
+        const percentageCoursesFinished = ((totalCoursesFinished / totalCourses) * 100).toFixed(1);
 
         const chartData = {
             totalCoursesFinished,
