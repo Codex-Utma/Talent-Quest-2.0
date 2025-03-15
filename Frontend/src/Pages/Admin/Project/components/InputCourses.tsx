@@ -56,7 +56,7 @@ export default function InputCourses({ register }: { register: UseFormRegister<P
                     value={course}
                     onChange={handleChange}
                 />
-                {courses.length > 0 && (
+                { courses && courses.length > 0 ? (
                     <div className="absolute w-full bg-white border border-gray-300 rounded-md mt-1">
                         {courses.map((course, index) => (
                             <div
@@ -68,6 +68,8 @@ export default function InputCourses({ register }: { register: UseFormRegister<P
                             </div>
                         ))}
                     </div>
+                ) : (
+                    null
                 )}
             </div>
             <div>

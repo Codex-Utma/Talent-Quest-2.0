@@ -6,8 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InputProject from "./components/InputProject";
 import InputUser from "./components/InputUser";
 import { AxiosInstance } from "../../../config/axios";
+import { useNavigate } from "react-router-dom";
 
 const AssignWorker = () => {
+
+    const navigate = useNavigate();
 
     const { register, handleSubmit } = useForm<AssignProjectType>({
         resolver: zodResolver(assignProjectSchema),
@@ -20,6 +23,7 @@ const AssignWorker = () => {
                 employeeId: data.userId
             });
             alert(response.data.message);
+            navigate("/admin/project");
         } catch (error: any) {
             alert(error.response.data.message);
         }
@@ -42,7 +46,7 @@ const AssignWorker = () => {
 
                 {/* Botones */}
                 <div className="flex justify-end space-x-4">
-                    <button className="bg-blue-600 text-white rounded-md px-4 py-2">
+                    <button className="bg-blue-600 text-white rounded-md px-4 py-2 hover:cursor-pointer">
                         Asignar
                     </button>
                 </div>

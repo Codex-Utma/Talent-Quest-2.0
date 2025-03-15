@@ -64,7 +64,7 @@ export default function InputProject({ register }: InputProjectProps) {
             />
             {loading && <p className="text-sm text-gray-500 mt-1">Buscando...</p>}
             {
-                projects.length > 0 && (
+                projects && projects.length > 0 ? (
                     <div className="absolute w-full bg-white border border-gray-300 mt-1 rounded-md">
                         {projects.map((project) => (
                             <div
@@ -76,7 +76,7 @@ export default function InputProject({ register }: InputProjectProps) {
                             </div>
                         ))}
                     </div>
-                )
+                ): null
             }
             {selectedProject && (
                 <div className="mt-4">

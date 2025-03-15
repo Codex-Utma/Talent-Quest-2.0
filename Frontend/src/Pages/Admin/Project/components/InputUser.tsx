@@ -60,7 +60,7 @@ export default function InputUser({ register }: InputUserProps) {
                 onChange={handleInput}
             />
             {loading && <p className="text-sm text-gray-500 mt-1">Buscando...</p>}
-            {employees.length > 0 && (
+            { employees && employees.length > 0 ? (
                 <div className="absolute w-full bg-white border border-gray-300 rounded-md mt-1 shadow-md z-10">
                     {employees.map((employee) => (
                         <div
@@ -72,7 +72,7 @@ export default function InputUser({ register }: InputUserProps) {
                         </div>
                     ))}
                 </div>
-            )}
+            ): null}
 
             {selectedEmployee && (
                 <div className="mt-4">

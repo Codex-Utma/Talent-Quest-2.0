@@ -6,8 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectInputType } from "../../../../types/project";
 import { projectSchema } from "../../../../schemas/project.schema";
 import { AxiosInstance } from "../../../../config/axios";
+import { useNavigate } from "react-router-dom";
 
 const NewProject = () => {
+
+    const navigate = useNavigate();
 
     const { register, handleSubmit } = useForm<ProjectInputType>({
         resolver: zodResolver(projectSchema),
@@ -21,6 +24,7 @@ const NewProject = () => {
                 neededCourses: data.courses
             });
             alert(response.data.message);
+            navigate("/admin/project");
         } catch (error: any) {
             alert(error.response.data.message);
         }
@@ -78,7 +82,7 @@ const NewProject = () => {
 
                     {/* Botón de Guardar */}
                     <div className="flex justify-end space-x-4">
-                        <button className="bg-blue-600 text-white rounded-md px-4 py-2">
+                        <button className="bg-blue-600 text-white rounded-md px-4 py-2 hover:cursor-pointer">
                             Guardar
                         </button>
                     </div>
