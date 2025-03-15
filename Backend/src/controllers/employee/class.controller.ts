@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
 import returnResponse from "../../utils/auto/httpResponse";
+import createGptPrompt from "../../utils/auto/gptPrompt";
+import openai from "../../utils/helpers/openAISetup";
 
 const prisma = new PrismaClient();
 
@@ -136,6 +138,80 @@ const addClassCompleted = async (req: Request, res: Response) => {
     }
 }
 
+const getGptResponse = async (req: Request, res: Response) => {
+    try {
+        const { courseId, moduleId, classId, message } = req.body;
+
+        if (!courseId || !moduleId || !classId || !message) {
+            return returnResponse(res, 400, "Todos los campos son requeridos");
+        }
+
+        const currentCourse = await prisma.course.findUnique({
+            where: {
+                id: Number(courseId)
+            },
+            select: {
+                name: true
+            }
+        });
+
+        if (!currentCourse) {
+            return returnResponse(res, 404, "Curso no encontrado");
+        }
+
+        const currentModule = await prisma.module.findUnique({
+            where: {
+                id: Number(moduleId)
+            },
+            select: {
+                name: true
+            }
+        });
+
+        if (!currentModule) {
+            return returnResponse(res, 404, "Módulo no encontrado");
+        }
+
+        const currentClass = await prisma.class.findUnique({
+            where: {
+                id: Number(classId)
+            },
+            select: {
+                name: true
+            }
+        });
+
+        if (!currentClass) {
+            return returnResponse(res, 404, "Clase no encontrada");
+        }
+
+        const prompt = createGptPrompt(currentCourse.name, currentModule.name, currentClass.name, message);
+
+        console.log(prompt);
+
+        let gptResponse;
+
+        try {
+            gptResponse = await openai.chat.completions.create({
+                model: "text-moderation-latest",
+                messages: [{ role: "user", content: prompt }],
+                max_tokens: 500,
+            });
+        } catch (error: any) {
+            console.log(error);
+            return returnResponse(res, error.status, error.message);
+        }
+
+        const response = gptResponse.choices[0].message.content;
+
+        return returnResponse(res, 200, "Respuesta generada", response);
+    } catch (error) {
+        console.log(error);
+        return returnResponse(res, 500, "Error interno del servidor");
+    }
+};
+
 export {
-    addClassCompleted
+    addClassCompleted,
+    getGptResponse
 }
