@@ -37,6 +37,7 @@ import EmployeeProject from './Pages/User/Project/proyecto.tsx'
 import ModuleFromCourse from './Pages/User/Course/Modules.tsx'
 import ClassesFromModule from './Pages/User/Module/Classes.tsx'
 import ResourcesFromClass from './Pages/User/Class/Resources.tsx'
+import KardexUsers from './Pages/Admin/Users/Kardex.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -72,6 +73,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="assignWorker" element={<AssignWorker />} />
         </Route>
 
+        <Route path="kardex/:employeeId" element={<KardexUsers />} />
       </Route>
 
       <Route path="/employee" element={<EmployeeLayout />} >

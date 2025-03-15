@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as echarts from 'echarts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AxiosInstance } from '../../config/axios';
 import { AdminDashboardType } from '../../types/adminDashboard';
 
@@ -11,6 +11,9 @@ const Shortcuts = [
 ];
 
 const AdministratorPage: React.FC = () => {
+
+    const navigate = useNavigate();
+
     const [dashboardData, setDashboardData] = useState<AdminDashboardType | null>(null);
 
     useEffect(() => {
@@ -131,7 +134,9 @@ const AdministratorPage: React.FC = () => {
                                                 <div className="text-sm text-gray-500">{new Date(employee.updatedAt).toLocaleDateString()}</div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <button className="text-blue-600 hover:underline">Ver Kardex</button>
+                                                <button className="text-blue-600 hover:underline"
+                                                    onClick={() => navigate(`/admin/kardex/${employee.id}`)}
+                                                >Ver Kardex</button>
                                             </td>
                                         </tr>
                                     )) || (
