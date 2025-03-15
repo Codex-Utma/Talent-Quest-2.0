@@ -48,7 +48,16 @@ const getDashboardAdmin = async (req: Request, res: Response) => {
 
         const availableEmployees = await prisma.user.findMany({
             where: {
-                projectId: null
+                AND: [
+                    {
+                        projectId: null
+                    },
+                    {
+                        UserType: {
+                            name: "Employee"
+                        }
+                    }
+                ]
             },
             select: {
                 id: true,
