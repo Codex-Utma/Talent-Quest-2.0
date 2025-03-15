@@ -30,8 +30,11 @@ import Newresource from './Pages/Admin/Resource/Newresource.tsx'
 import Project from './Pages/Admin/Project/Project.tsx'
 
 import AdministratorPage from './Pages/Admin/Main.tsx'
-import EmployeeProject from './Pages/User/Project/proyecto.tsx'
+
 import Kardex from './Pages/kardex.tsx'
+
+import EmployeeProject from './Pages/User/Project/proyecto.tsx'
+import ModuleFromCourse from './Pages/User/Course/Modules.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -73,6 +76,14 @@ createRoot(document.getElementById('root')!).render(
         <Route index element={<MisCursos />} />
         <Route path="project" element={<EmployeeProject />} />
         <Route path="kardex" element={<Kardex />} />
+        <Route path="course/:courseId" >
+          <Route index element={<ModuleFromCourse />} />
+          <Route path=":moduleId">
+            <Route index element={<ModuleFromCourse />} />
+
+            <Route />
+          </Route>
+        </Route>
       </Route>
 
     </Routes>

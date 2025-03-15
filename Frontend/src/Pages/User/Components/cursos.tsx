@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { CourseData } from "../../../types/dashboard";
 
 export default function CourseDashboard({ course }: { course: CourseData }) {
+
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 overflow-hidden">
-      <div className="p-4">
+      <div className="p-4 hover:cursor-pointer" onClick={() => navigate(`/employee/course/${course.Course.id}`)}>
         <h3 className="text-lg font-semibold text-gray-800">{course.Course.name}</h3>
         <p className="mt-2 text-sm text-gray-500">{course.percentage}% completado</p>
 
