@@ -35,6 +35,7 @@ import Kardex from './Pages/kardex.tsx'
 
 import EmployeeProject from './Pages/User/Project/proyecto.tsx'
 import ModuleFromCourse from './Pages/User/Course/Modules.tsx'
+import ClassesFromModule from './Pages/User/Module/Classes.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -79,8 +80,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="course/:courseId" >
           <Route index element={<ModuleFromCourse />} />
           <Route path=":moduleId">
-            <Route index element={<ModuleFromCourse />} />
-
+            <Route index element={<ClassesFromModule />} />
             <Route />
           </Route>
         </Route>
