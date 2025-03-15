@@ -52,12 +52,12 @@ const Project = () => {
         </div>
 
         <div className="border-t border-gray-200 px-6 py-8 bg-gray-50 flex items-center justify-between">
-          <button className="rounded-md bg-blue-600 text-white px-6 py-2 font-medium hover:bg-blue-700 flex items-center"
+          <button className="rounded-md bg-blue-600 text-white px-6 py-2 font-medium hover:bg-blue-700 flex items-center hover:cursor-pointer"
             onClick={() => navigate("/admin/project/newProject")}
           >
             <FaPlus className="mr-2" /> Agregar Proyecto
           </button>
-          <button className="rounded-md bg-white text-blue-600 border border-blue-600 px-6 py-2 font-medium hover:bg-gray-50 flex items-center"
+          <button className="rounded-md bg-white text-blue-600 border border-blue-600 px-6 py-2 font-medium hover:bg-gray-50 flex items-center hover:cursor-pointer"
             onClick={() => navigate("/admin/project/assignWorker")}
           >
             <FaUserPlus className="mr-2" /> Asignar Trabajadores

@@ -48,7 +48,7 @@ const Class = () => {
           Lista de todas las clases disponibles en el módulo.
         </p>
 
-        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
           onClick={() => navigate(`/admin/courses/${courseId}/${moduleId}/add`)}>
           <i className="fas fa-user-plus mr-2"></i>
           Nueva Clase
@@ -93,7 +93,7 @@ const Class = () => {
                 ) : (
                   <tr>
                     <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
-                      <div className="text-center text-gray-500">No hay cursos disponibles</div>
+                      <div className="text-center text-gray-500">No hay classes disponibles</div>
                     </td>
                   </tr>
                 )

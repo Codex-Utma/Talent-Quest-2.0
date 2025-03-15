@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 export default function LogoutButton() {
 
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -24,7 +24,7 @@ export default function LogoutButton() {
 
     return (
         <div className="relative" >
-            <div className="flex items-center"
+            <div className="flex items-center hover:cursor-pointer"
                 onClick={toggleDropdown}
             >
                 <img
@@ -32,7 +32,7 @@ export default function LogoutButton() {
                     src="https://thumbs.dreamstime.com/b/icono-ejecutivo-joven-del-perfil-de-la-mujer-81933348.jpg"
                     alt="Perfil de Admin"
                 />
-                <span className="ml-3 text-sm font-medium text-gray-700">Admin</span>
+                <span className="ml-3 text-sm font-medium text-gray-700">{`${user?.name} ${user?.lastName}`}</span>
             </div>
             {
                 isDropdownOpen && (

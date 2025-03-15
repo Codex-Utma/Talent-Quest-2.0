@@ -1,6 +1,24 @@
 import React from 'react';
 import * as echarts from 'echarts';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+const Shortcuts = [
+    {
+        title: "Nuevo trabajador",
+        icon: "fas fa-user-plus",
+        to: "/admin/register"
+    },
+    {
+        title: "Nuevo proyecto",
+        icon: "fas fa-user-plus",
+        to: "/admin/project/newProject"
+    },
+    {
+        title: "Asignar trabajador",
+        icon: "fas fa-file-alt",
+        to: "/admin/project/assignWorker"
+    }
+]
 
 const AdministratorPage: React.FC = () => {
 
@@ -93,24 +111,11 @@ const AdministratorPage: React.FC = () => {
                     {/* Quick Actions */}
                     <div className="mb-8">
                         <div className="flex space-x-4">
-                            <button className="bg-blue-600 text-white rounded-md px-4 py-2"
-                                onClick={() => navigate('/admin/register')}
-                            >
-                                <i className="fas fa-user-plus mr-2"></i>
-                                Nuevo Trabajador
-                            </button>
-                            <button className="bg-blue-600 text-white rounded-md px-4 py-2"
-                                onClick={() => navigate('/admin/project/newProject')}
-                            >
-                                <i className="fas fa-user-plus mr-2"></i>
-                                Crear Proyecto
-                            </button>
-                            <button className="bg-blue-600 text-white rounded-md px-4 py-2"
-                                onClick={() => navigate('/admin/project/assignWorker')}
-                            >
-                                <i className="fas fa-file-alt mr-2"></i>
-                                Asignar Trabajador
-                            </button>
+                            {
+                                Shortcuts.map((shortcut, index) => (
+                                    <CustomShortcut key={index} title={shortcut.title} icon={shortcut.icon} to={shortcut.to} />
+                                ))
+                            }
                         </div>
                     </div>
                 </main>
@@ -252,3 +257,14 @@ const AdministratorPage: React.FC = () => {
 };
 
 export default AdministratorPage;
+
+const CustomShortcut = ({ title, icon, to }: { title: string, icon: string, to: string }) => {
+    return (
+        <Link to={to} className="bg-blue-600 text-white rounded-md px-4 py-2 hover:cursor-pointer">
+            <button className='hover:cursor-pointer'>
+                <i className={icon + " mr-2 hover:cursor-pointer"}></i>
+                <span className='hover:cursor-pointer'>{title}</span>
+            </button>
+        </Link>
+    );
+}

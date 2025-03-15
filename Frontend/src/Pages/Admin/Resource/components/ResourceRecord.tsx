@@ -16,7 +16,7 @@ export function ExternalResourceRecord({ resource }: { resource: ExternalResourc
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm">
                 <div className="flex space-x-3">
-                    <button className="text-custom hover:text-custom-600 !rounded-button"
+                    <button className="text-custom hover:text-custom-600 !rounded-button hover:cursor-pointer"
                         onClick={() => window.open(resource.url, "_blank")}
                     >
                         <i className="fas fa-eye"></i>
@@ -70,7 +70,7 @@ export function FileResourceRecord({ resource }: { resource: FileResourceType })
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm">
                 <div className="flex space-x-3">
-                    <button className="text-custom hover:text-custom-600 !rounded-button"
+                    <button className="text-custom hover:text-custom-600 !rounded-button hover:cursor-pointer"
                         onClick={handleClick}
                     >
                         <i className="fas fa-eye"></i>

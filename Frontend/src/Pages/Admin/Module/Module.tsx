@@ -48,7 +48,7 @@ const Module = () => {
           Lista de todos los módulos disponibles en el curso.
         </p>
 
-        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
           onClick={() => navigate(`/admin/courses/${courseId}/add`)}>
           <i className="fas fa-user-plus mr-2"></i>
           Nuevo Módulo

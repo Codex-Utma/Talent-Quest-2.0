@@ -65,7 +65,7 @@ const NewClass = () => {
                                             placeholder="Describe el contenido de la clase..."
                                             {...register("description")}
                                             ></textarea>
-                                        <button className="bg-black text-white rounded px-4 py-2 flex items-center">
+                                        <button className="bg-black text-white rounded px-4 py-2 flex items-center hover:cursor-pointer">
                                             <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16v4a2 2 0 002 2h14a2 2 0 002-2v-4m-8-4l-4 4m0 0l-4-4m4 4V4" />
                                             </svg>

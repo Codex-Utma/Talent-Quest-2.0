@@ -163,14 +163,14 @@ export default function RegisterForm({departments, userTypes}: {departments: Dep
                     <div className="flex justify-between space-x-4">
                         <button
                             type="button"
-                            className="w-full py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                            className="w-full py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 hover:cursor-pointer"
                             onClick={() => window.history.back()}
                         >
                             Cancelar
                         </button>
                         <button
                             type="submit"
-                            className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                            className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 hover:cursor-pointer"
                         >
                             Registrar Empleado
                         </button>

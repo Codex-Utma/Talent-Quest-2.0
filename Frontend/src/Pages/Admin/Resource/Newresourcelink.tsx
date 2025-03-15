@@ -80,7 +80,7 @@ const Newresourcelink= () => {
                         {/* Botones de Guardar y Publicar */}
                         <div className="flex justify-end space-x-4">
 
-                            <button className="bg-blue-600 text-white rounded-md px-4 py-2">
+                            <button className="bg-blue-600 text-white rounded-md px-4 py-2 hover:cursor-pointer">
                                 Guardar
                             </button>
                         </div>

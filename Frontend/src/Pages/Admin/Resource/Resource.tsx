@@ -49,12 +49,12 @@ const Resource = () => {
         </p>
 
         <div className='space-x-4'>
-          <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+          <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
             onClick={() => navigate(`/admin/courses/${courseId}/${moduleId}/${classId}/add/external`)}>
             <i className="fas fa-user-plus mr-2"></i>
             Nuevo Recurso (externo)
           </button>
-          <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+          <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
             onClick={() => navigate(`/admin/courses/${courseId}/${moduleId}/${classId}/add/file`)}>
             <i className="fas fa-user-plus mr-2"></i>
             Nuevo Recurso (archivo)

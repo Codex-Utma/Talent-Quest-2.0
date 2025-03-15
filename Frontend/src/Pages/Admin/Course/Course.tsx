@@ -32,7 +32,7 @@ const Course = () => {
         <p className="text-gray-500 mb-8 text-left">
           Lista de todos los cursos disponibles en el sistema.
         </p>
-        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8"
+        <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
           onClick={() => navigate('/admin/courses/add')}
         >
           <i className="fas fa-user-plus mr-2"></i>

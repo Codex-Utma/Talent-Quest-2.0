@@ -5,6 +5,29 @@ import useAuth from "../hooks/useAuth";
 import { AxiosInstance } from "../config/axios";
 import LogoutButton from "./components/LogoutButton";
 
+const NavigationsItems = [
+    {
+        title: 'Dashboard',
+        icon: 'fas fa-chart-line',
+        to: '/admin'
+    },
+    {
+        title: 'Usuarios',
+        icon: 'fas fa-users',
+        to: '/admin/register'
+    },
+    {
+        title: 'Cursos',
+        icon: 'fas fa-graduation-cap',
+        to: '/admin/courses'
+    },
+    {
+        title: 'Proyectos',
+        icon: 'fas fa-chart-bar',
+        to: '/admin/project'
+    }
+]
+
 export default function AdminLayout() {
 
     const navigate = useNavigate();
@@ -28,30 +51,16 @@ export default function AdminLayout() {
             {/* Sidebar */}
             <aside className="w-64 bg-white shadow-lg fixed left-0 top-0 h-full mt-20">
                 <nav className="mt-6">
-                    <Link className="flex items-center px-6 py-3 text-custom bg-blue-50"
-                        to="/admin"
-                    >
-                        <i className="fas fa-chart-line w-5 h-5 mr-3"></i>
-                        <span>Dashboard</span>
-                    </Link>
-                    <Link className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-                        to="/admin/register"
-                    >
-                        <i className="fas fa-users w-5 h-5 mr-3"></i>
-                        <span>Usuarios</span>
-                    </Link>
-                    <Link className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-                        to="/admin/courses"
-                    >
-                        <i className="fas fa-graduation-cap w-5 h-5 mr-3"></i>
-                        <span>Cursos</span>
-                    </Link>
-                    <Link className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
-                        to="/admin/project"
-                    >
-                        <i className="fas fa-chart-bar w-5 h-5 mr-3"></i>
-                        <span>Proyectos</span>
-                    </Link>
+                    {
+                        NavigationsItems.map((item, index) => (
+                            <CustomLink
+                                key={index}
+                                to={item.to}
+                                icon={item.icon}
+                                title={item.title}
+                            />
+                        ))
+                    }
                 </nav>
             </aside>
 
@@ -61,12 +70,13 @@ export default function AdminLayout() {
                     <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between">
                         <div className="flex items-center">
                             <div className="p-6">
-                                <img
-                                    src="https://ucarecdn.com/1e16f66a-0704-43a1-a16f-65c23988af64/-/format/auto/-/quality/smart/"
-                                    alt="Logo"
-                                    className="h-10 hover:cursor-pointer"
-                                    onClick={() => navigate('/admin')}
-                                />
+                                <Link to="/admin">
+                                    <img
+                                        src="https://ucarecdn.com/1e16f66a-0704-43a1-a16f-65c23988af64/-/format/auto/-/quality/smart/"
+                                        alt="Logo"
+                                        className="h-10 hover:cursor-pointer"
+                                    />
+                                </Link>
                             </div>
                         </div>
                         <div className="flex items-center">
@@ -84,6 +94,15 @@ export default function AdminLayout() {
             </div>
         </div>
     );
-
-
 }
+
+const CustomLink = ({ to, icon, title }: { to: string; icon: string; title: string }) => {
+    return (
+        <Link className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50"
+            to={to}
+        >
+            <i className={`${icon} w-5 h-5 mr-3`}></i>
+            <span>{title}</span>
+        </Link>
+    );
+};
