@@ -93,25 +93,27 @@ const Resource = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {
-                externalResources.length > 0 || fileResources.length > 0 ? (
-                  <>
-                    {externalResources.map((resource) => (
-                      <ExternalResourceRecord key={resource.id} resource={resource} />
-                    ))}
-                    {fileResources.map((resource) => (
-                      <FileResourceRecord key={resource.id} resource={resource} />
-                    ))}
-                  </>
-                ) : (
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
-                      <div className="text-center text-gray-500">No hay cursos disponibles</div>
-                    </td>
-                  </tr>
-                )
+              {externalResources && externalResources.length > 0 &&
+                externalResources.map((resource) => (
+                  <ExternalResourceRecord key={resource.id} resource={resource} />
+                ))
               }
+
+              {fileResources && fileResources.length > 0 &&
+                fileResources.map((resource) => (
+                  <FileResourceRecord key={resource.id} resource={resource} />
+                ))
+              }
+
+              {externalResources.length === 0 && fileResources.length === 0 && (
+                <tr>
+                  <td className="px-6 py-4 text-center text-gray-500" colSpan={3}>
+                    No hay recursos disponibles
+                  </td>
+                </tr>
+              )}
             </tbody>
+
           </table>
         </div>
 
