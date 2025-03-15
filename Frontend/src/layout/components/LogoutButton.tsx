@@ -39,7 +39,7 @@ export default function LogoutButton() {
                     <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-10">
                         <button
                             onClick={handleLogout}
-                            className="w-full text-left py-2 px-4 text-red-600 hover:bg-gray-100 transition"
+                            className="w-full text-left py-2 px-4 text-red-600 hover:bg-gray-100 transition hover:cursor-pointer"
                         >
                             Cerrar sesión
                         </button>

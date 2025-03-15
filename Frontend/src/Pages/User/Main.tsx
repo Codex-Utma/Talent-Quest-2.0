@@ -1,13 +1,10 @@
 import Navbar from "./Components/NavbarProps";
-
 import { useState, useEffect } from "react";
-
 import { AxiosInstance } from "../../config/axios";
 import { CourseData, DashboardResponseType } from "../../types/dashboard";
 import CourseDashboard from "./Components/cursos";
 
 const MisCursos = () => {
-
   const [dashboardData, setDashboardData] = useState<DashboardResponseType>({} as DashboardResponseType);
   const [courses, setCourses] = useState<CourseData[]>([]);
 
@@ -25,26 +22,20 @@ const MisCursos = () => {
   }, []);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-
-      <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pl-12">
+    <div className="bg-gray-100 min-h-screen">
+      <main className="max-w-7xl mx-auto px-6 py-8">
         <Navbar activeCourses={dashboardData.activeCourses} completedCourses={dashboardData.finishedCourses} />
-        <div>
-          <div className="grid grid-cols-12 gap-6 mt-6 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pl-12">
-            <section className="col-span-12 lg:col-span-12 xl:col-span-12">
-              <div className="bg-white rounded-lg shadow p-6">
-                <h2 className="text-lg font-semibold text-gray-900">Cursos Activos</h2>
-                <div className="grid grid-cols-2 gap-6 mt-4">
-                  {
-                    courses.map(course => (
-                      <CourseDashboard course={course} />
-                    ))
-                  }
-                </div>
-              </div>
-            </section>
+
+        <section className="mt-8">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Cursos Activos</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {courses.map(course => (
+                <CourseDashboard key={course.Course.id} course={course} />
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
       </main>
     </div>
   );
