@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import useAuth from "../hooks/useAuth";
 import { AxiosInstance } from "../config/axios";
+import LogoutButton from "./components/LogoutButton";
 
 export default function AdminLayout() {
 
@@ -70,14 +71,7 @@ export default function AdminLayout() {
                         </div>
                         <div className="flex items-center">
                             <div className="ml-4 relative flex-shrink-0">
-                                <div className="flex items-center">
-                                    <img
-                                        className="h-8 w-10 rounded-full"
-                                        src="https://thumbs.dreamstime.com/b/icono-ejecutivo-joven-del-perfil-de-la-mujer-81933348.jpg"
-                                        alt="Perfil de Admin"
-                                    />
-                                    <span className="ml-3 text-sm font-medium text-gray-700">Admin</span>
-                                </div>
+                                <LogoutButton />
                             </div>
                         </div>
                     </div>
