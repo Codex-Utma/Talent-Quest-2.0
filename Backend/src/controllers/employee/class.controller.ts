@@ -119,6 +119,17 @@ const addClassCompleted = async (req: Request, res: Response) => {
             }
         });
 
+        if (percentage === 100) {
+            await prisma.progress.update({
+                where: {
+                    id: progressUser.id
+                },
+                data: {
+                    isFinished: true
+                }
+            });
+        }
+
         return returnResponse(res, 200, "Clase completada");
     } catch {
         return returnResponse(res, 500, "Error interno del servidor");
