@@ -51,6 +51,7 @@ const getDashboardAdmin = async (req: Request, res: Response) => {
                 projectId: null
             },
             select: {
+                id: true,
                 name: true,
                 lastName: true,
                 Department: {
@@ -71,7 +72,7 @@ const getDashboardAdmin = async (req: Request, res: Response) => {
         }
 
         return returnResponse(res, 200, "Datos obtenidos correctamente", response)
-    } catch (error) {
+    } catch {
         return returnResponse(res, 500, "Error interno del servidor");
     }
 }
