@@ -4,7 +4,7 @@ import authMiddleware from "../utils/helpers/authMiddleware";
 
 import moduleRouter from "./employee/course.routes";
 import classRouter from "./employee/module.routes";
-import { getResourcesByClass } from "../controllers/admin/resource.controller";
+import { getFileResource, getResourcesByClass } from "../controllers/admin/resource.controller";
 
 const router = Router();
 
@@ -21,6 +21,10 @@ router.use("/classes", classRouter);
 
 router.get("/resources/:classId", (req, res) => {
     getResourcesByClass(req, res);
+});
+
+router.get("/resource/file/:resourceId", (req, res) => {
+    getFileResource(req, res);
 });
 
 export default router;
