@@ -2,7 +2,8 @@ import { Router } from "express";
 import { getDashboardInfo, getKardexData } from "../controllers/employee/main.controller";
 import authMiddleware from "../utils/helpers/authMiddleware";
 
-import courseRouter from "./employee/course.routes";
+import moduleRouter from "./employee/course.routes";
+import classRouter from "./employee/class.routes";
 
 const router = Router();
 
@@ -14,6 +15,7 @@ router.get("/kardex", authMiddleware("employee"), (req, res) => {
     getKardexData(req, res);
 });
 
-router.use("/modules", courseRouter);
+router.use("/modules", moduleRouter);
+router.use("/classes", classRouter);
 
 export default router;
