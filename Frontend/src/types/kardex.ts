@@ -6,8 +6,10 @@ export interface KardexType {
 }
 
 export interface InsigniaType {
-    id: number;
-    name: string;
+    Insignia: {
+        id: number;
+        name: string;
+    }
 }
 
 export interface ProjectType {
