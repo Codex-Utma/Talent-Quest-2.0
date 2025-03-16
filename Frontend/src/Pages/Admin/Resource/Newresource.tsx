@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm, FieldErrors } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ResourceFileInputType } from "../../../types/resource";
 import { fileResourceSchema } from "../../../schemas/fileResource.schema";
@@ -49,12 +49,6 @@ const NewResource = () => {
         }
     };
 
-
-    const onError = (errors: FieldErrors) => {
-        alert("Error al validar el formulario");
-        console.log(errors);
-    };
-
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -68,7 +62,7 @@ const NewResource = () => {
         <div className="flex flex-col p-8 bg-transparent">
             <div className="py-10">
                 <h1 className="text-2xl font-bold mb-6">Agregar Nuevo Recurso Educativo</h1>
-                <form className="space-y-6" onSubmit={handleSubmit(onSubmit, onError)}>
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     {/* Título del Recurso */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Título del Recurso</label>

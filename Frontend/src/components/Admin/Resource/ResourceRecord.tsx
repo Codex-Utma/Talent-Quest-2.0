@@ -1,5 +1,5 @@
-import { AxiosInstance } from "../../../../config/axios";
-import { ExternalResourceType, FileResourceType } from "../../../../types/resource";
+import { AxiosInstance } from "../../../config/axios";
+import { ExternalResourceType, FileResourceType } from "../../../types/resource";
 
 export function ExternalResourceRecord({ resource }: { resource: ExternalResourceType }) {
     return (

@@ -11,5 +11,6 @@ export const externalResourceSchema = z.object({
         .max(128, { message: "La descripción del recurso debe tener como máximo 128 caracteres" }),
     url: z
         .string()
+        .nonempty({ message: "La URL del recurso no puede estar vacía" })
         .max(128, { message: "La URL del recurso debe tener como máximo 128 caracteres" }),
 });

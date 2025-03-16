@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosInstance } from '../../../config/axios';
 import { ExternalResourceType, FileResourceType, ResourceResponseType } from '../../../types/resource';
 import { ClassType } from '../../../types/class';
-import { ExternalResourceRecord, FileResourceRecord } from './components/ResourceRecord';
+import ResourceTable from '../../../components/Admin/Resource/ResourceTable';
 
 const Resource = () => {
 
@@ -23,7 +23,6 @@ const Resource = () => {
         const response = await AxiosInstance.get(`/admin/resource/all/${classId}`);
         console.log(response.data.data);
         const data: ResourceResponseType = response.data.data;
-        console.log(data.resources.File);
         setClassData({
           id: Number(data.id),
           name: data.name,
@@ -51,12 +50,12 @@ const Resource = () => {
         <div className='space-x-4'>
           <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
             onClick={() => navigate(`/admin/courses/${courseId}/${moduleId}/${classId}/add/external`)}>
-            <i className="fas fa-user-plus mr-2"></i>
+            <i className="fas fa-link mr-2"></i>
             Nuevo Recurso (externo)
           </button>
           <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
             onClick={() => navigate(`/admin/courses/${courseId}/${moduleId}/${classId}/add/file`)}>
-            <i className="fas fa-user-plus mr-2"></i>
+            <i className="fas fa-file mr-2"></i>
             Nuevo Recurso (archivo)
           </button>
         </div>
@@ -78,43 +77,7 @@ const Resource = () => {
 
         {/* Tabla de clases */}
         <div className="bg-white shadow rounded-lg overflow-hidden mb-6">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre del Recurso
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Descripción
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {externalResources && externalResources.length > 0 &&
-                externalResources.map((resource) => (
-                  <ExternalResourceRecord key={resource.id} resource={resource} />
-                ))
-              }
-
-              {fileResources && fileResources.length > 0 &&
-                fileResources.map((resource) => (
-                  <FileResourceRecord key={resource.id} resource={resource} />
-                ))
-              }
-
-              {externalResources.length === 0 && fileResources.length === 0 && (
-                <tr>
-                  <td className="px-6 py-4 text-center text-gray-500" colSpan={3}>
-                    No hay recursos disponibles
-                  </td>
-                </tr>
-              )}
-            </tbody>
-
-          </table>
+          <ResourceTable externalResources={externalResources} fileResources={fileResources} />
         </div>
 
         {/* Botón para agregar clase */}
