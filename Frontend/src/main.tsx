@@ -38,6 +38,7 @@ import ModuleFromCourse from './Pages/User/Course/Modules.tsx'
 import ClassesFromModule from './Pages/User/Module/Classes.tsx'
 import ResourcesFromClass from './Pages/User/Class/Resources.tsx'
 import KardexUsers from './Pages/Admin/Users/Kardex.tsx'
+import ChatBot from './Pages/User/ChatBot/ChatBot.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -90,6 +91,7 @@ createRoot(document.getElementById('root')!).render(
             <Route />
           </Route>
         </Route>
+        <Route path="chat-bot" element={<ChatBot />} />
       </Route>
 
     </Routes>
