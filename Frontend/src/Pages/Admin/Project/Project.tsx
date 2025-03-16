@@ -41,7 +41,7 @@ const Project = () => {
 
           <div className="mt-6 space-y-4">
             {
-              projects.length > 0 ?
+              projects && projects.length > 0 ?
                 projects.map(project => (
                   <ProjectRecord key={project.id} project={project} />
                 ))
