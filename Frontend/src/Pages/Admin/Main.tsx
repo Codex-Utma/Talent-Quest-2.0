@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as echarts from 'echarts';
-import { Link, useNavigate } from 'react-router-dom';
 import { AxiosInstance } from '../../config/axios';
 import { AdminDashboardType } from '../../types/adminDashboard';
+import CustomShortcut from '../../components/Admin/Main/CustomShortcut';
+import CustomTargetData from '../../components/Admin/Main/CustomTargetData';
+import CustomTable from '../../components/Admin/Main/CustomTable';
 
 const Shortcuts = [
     { title: "Nuevo trabajador", icon: "fas fa-user-plus", to: "/admin/register" },
@@ -11,8 +13,6 @@ const Shortcuts = [
 ];
 
 const AdministratorPage: React.FC = () => {
-
-    const navigate = useNavigate();
 
     const [dashboardData, setDashboardData] = useState<AdminDashboardType | null>(null);
 
@@ -82,21 +82,10 @@ const AdministratorPage: React.FC = () => {
                         { icon: "fas fa-graduation-cap", label: "Cursos Activos", value: dashboardData.totalCourses },
                         { icon: "fas fa-chart-line", label: "Tasa de Finalización", value: `${dashboardData.percentageCoursesFinished}%` }
                     ].map((stat, index) => (
-                        <div key={index} className="bg-white overflow-hidden shadow rounded-lg">
-                            <div className="p-5 flex items-center">
-                                <i className={`${stat.icon} text-custom text-3xl`}></i>
-                                <div className="ml-5 flex-1">
-                                    <dl>
-                                        <dt className="text-sm font-medium text-gray-500 truncate">{stat.label}</dt>
-                                        <dd className="text-lg font-semibold text-gray-900">{stat.value}</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
+                        <CustomTargetData key={index} stat={stat} />
                     ))}
                 </div>
 
-                {/* Charts */}
                 <div className="mt-8">
                     <div className="bg-white shadow rounded-lg p-6">
                         <h3 className="text-lg font-medium text-gray-900 mb-4">Estadísticas de Cursos</h3>
@@ -104,67 +93,23 @@ const AdministratorPage: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Available Employees */}
                 <div className="mt-8">
                     <div className="bg-white shadow rounded-lg">
                         <div className="px-6 py-4 border-b border-gray-200">
                             <h3 className="text-lg font-medium text-gray-900">Trabajadores en Pull</h3>
                         </div>
                         <div className="overflow-x-auto">
-                            <table className="min-w-full divide-y divide-gray-200">
-                                <thead className="bg-gray-50">
-                                    <tr>
-                                        {["Nombre", "Departamento", "Empleado disponible desde:", "Acciones"].map((header) => (
-                                            <th key={header} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                {header}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody className="bg-white divide-y divide-gray-200">
-                                    {dashboardData?.availableEmployees.map((employee, index) => (
-                                        <tr key={index}>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm font-medium text-gray-900">{employee.name} {employee.lastName}</div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-500">{employee.Department.name}</div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm text-gray-500">{new Date(employee.updatedAt).toLocaleDateString()}</div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <button className="text-blue-600 hover:underline"
-                                                    onClick={() => navigate(`/admin/kardex/${employee.id}`)}
-                                                >Ver Kardex</button>
-                                            </td>
-                                        </tr>
-                                    )) || (
-                                        <tr>
-                                            <td colSpan={4} className="text-center py-4 text-gray-500">No hay trabajadores disponibles</td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
+                            {
+                                dashboardData?.availableEmployees && (
+                                    <CustomTable availableEmployees={dashboardData.availableEmployees} />
+                                )
+                            }
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );
 };
 
 export default AdministratorPage;
-
-
-const CustomShortcut = ({ title, icon, to }: { title: string, icon: string, to: string }) => {
-    return (
-        <Link to={to} className="bg-blue-600 text-white rounded-md px-4 py-2 hover:cursor-pointer">
-            <button className='hover:cursor-pointer'>
-                <i className={icon + " mr-2 hover:cursor-pointer"}></i>
-                <span className='hover:cursor-pointer'>{title}</span>
-            </button>
-        </Link>
-    );
-}
