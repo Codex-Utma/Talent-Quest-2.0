@@ -3,8 +3,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useState, useEffect } from 'react';
 import { AxiosInstance } from '../../../config/axios';
 import { CoursesType } from '../../../types/course';
-import CourseRecord from './components/CourseRecord';
 import { useNavigate } from 'react-router-dom';
+import CourseTable from '../../../components/Admin/Course/CourseTable';
 
 const Course = () => {
 
@@ -35,7 +35,7 @@ const Course = () => {
         <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
           onClick={() => navigate('/admin/courses/add')}
         >
-          <i className="fas fa-user-plus mr-2"></i>
+          <i className="fas fa-plus mr-2"></i>
           Nuevo Curso
         </button>
 
@@ -55,36 +55,7 @@ const Course = () => {
 
         {/* Tabla de cursos */}
         <div className="bg-white shadow rounded-lg overflow-hidden mb-6">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre del Curso
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Descripción
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {
-                courses.length > 0 ? (
-                  courses.map((course) => (
-                    <CourseRecord key={course.id} course={course} />
-                  ))
-                ) : (
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
-                      <div className="text-center text-gray-500">No hay cursos disponibles</div>
-                    </td>
-                  </tr>
-                )
-              }
-            </tbody>
-          </table>
+          <CourseTable courses={courses} />
         </div>
 
         {/* Botón para agregar curso */}

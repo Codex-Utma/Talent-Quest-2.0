@@ -10,7 +10,7 @@ const NewCourse = () => {
 
     const navigate = useNavigate();
 
-      const { register, handleSubmit } = useForm<CourseType>({
+      const { register, handleSubmit, formState: { errors } } = useForm<CourseType>({
         resolver: zodResolver(courseSchema),
       });
 
@@ -22,11 +22,6 @@ const NewCourse = () => {
         } catch (error: any) {
             alert(error.response.data.message);
         }
-      }
-
-      const onError = (errors: FieldErrors) => {
-        alert("Error al crear el curso");
-        console.log(errors);
       }
 
     return (
@@ -42,7 +37,7 @@ const NewCourse = () => {
                     <div className="col-span-1">
                         <div className="bg-white shadow rounded-lg p-6">
                             <h2 className="text-lg font-medium text-gray-900 mb-4">Detalles del Curso</h2>
-                            <form onSubmit={handleSubmit(onSuccess, onError)}>
+                            <form onSubmit={handleSubmit(onSuccess)}>
                                 <div className="space-y-6">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700">Título del Curso</label>
@@ -51,6 +46,9 @@ const NewCourse = () => {
                                             placeholder="Curso..."
                                             {...register("name")}
                                             />
+                                            {
+                                                errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>
+                                            }
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700">Descripción</label>
@@ -59,6 +57,9 @@ const NewCourse = () => {
                                             placeholder="Describe el contenido del curso..."
                                             {...register("description")}
                                             ></textarea>
+                                            {
+                                                errors.description && <span className="text-red-500 text-xs">{errors.description.message}</span>
+                                            }
                                         <button className="bg-black text-white rounded px-4 py-2 flex items-center hover:cursor-pointer">
                                             <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16v4a2 2 0 002 2h14a2 2 0 002-2v-4m-8-4l-4 4m0 0l-4-4m4 4V4" />
