@@ -27,30 +27,91 @@ async function fakeCatalogs() {
                     name: "HR",
                     description: "Departamento de recursos humanos"
                 },
+                {
+                    name: "Finance",
+                    description: "Departamento de finanzas"
+                },
+                {
+                    name: "Sales",
+                    description: "Departamento de ventas"
+                },
+                {
+                    name: "Marketing",
+                    description: "Departamento de marketing"
+                }
             ]
         });
 
         await prisma.resourceType.createMany({
             data: [
                 {
-                    name: "Image",
+                    name: "File",
                     description: "png"
                 },
                 {
-                    name: "Image",
+                    name: "File",
                     description: "jpg"
                 },
                 {
-                    name: "Image",
+                    name: "File",
                     description: "jpeg"
                 },
                 {
-                    name: "Document",
+                    name: "File",
                     description: "pdf"
                 },
                 {
-                    name: "External Link",
+                    name: "External",
                     description: "url"
+                }
+            ]
+        });
+
+        await prisma.insignia.createMany({
+            data: [
+                {
+                    name: "Primer Curso",
+                    description: "Insignia por completar el primer curso"
+                },
+                {
+                    name: "Velocidad de Aprendizaje",
+                    description: "Insignia por completar un curso en tiempo récord"
+                },
+                {
+                    name: "Aprendiz Constante",
+                    description: "Insignia por completar 5 cursos"
+                },
+                {
+                    name: "Maestro del Conocimiento",
+                    description: "Insignia por completar 10 cursos"
+                },
+                {
+                    name: "Experto en la Materia",
+                    description: "Insignia por completar 20 cursos"
+                },
+                {
+                    name: "Maratón de Aprendizaje",
+                    description: "Insignia por completar 3 cursos en un solo día"
+                },
+                {
+                    name: "Madrugador",
+                    description: "Insignia por completar un curso antes de las 6 AM"
+                },
+                {
+                    name: "Noctámbulo",
+                    description: "Insignia por completar un curso después de las 11 PM"
+                },
+                {
+                    name: "Desafío Aceptado",
+                    description: "Insignia por completar un curso avanzado"
+                },
+                {
+                    name: "Certificado en Mano",
+                    description: "Insignia por obtener una certificación de un curso"
+                },
+                {
+                    name: "Coleccionista de Insignias",
+                    description: "Insignia por obtener 10 insignias diferentes"
                 }
             ]
         });
