@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { AxiosInstance } from "../../../config/axios";
 
-import RegisterForm from "../../../components/Admin/RegisterForm";
+import RegisterForm from "../../../components/Admin/Register/RegisterForm";
 import { DepartmentType } from "../../../types/department";
 import { UserTypeType } from "../../../types/userType";
 
