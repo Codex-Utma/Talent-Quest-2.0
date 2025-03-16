@@ -14,7 +14,7 @@ export default function CustomTargetData({stat}: CustomTargetDataProps) {
                 <div className="ml-5 flex-1">
                     <dl>
                         <dt className="text-sm font-medium text-gray-500 truncate">{stat.label}</dt>
-                        <dd className="text-lg font-semibold text-gray-900">{stat.value}</dd>
+                        <dd className="text-lg font-semibold text-gray-900">{!isNaN(Number(stat.value)) ? stat.value : 0}</dd>
                     </dl>
                 </div>
             </div>
