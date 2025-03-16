@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import CustomLinkResource from "./CustomLinkResource";
 import CustomFileResource from "./CustomFileResource";
 import MarkAsCompleted from "./MarkAsCompleted";
+import GptChat from "./GtpChat";
 
 export default function ResourcesFromClass() {
   const { classId } = useParams<{ classId: string }>();
@@ -45,8 +46,15 @@ export default function ResourcesFromClass() {
   return (
     <div className="bg-gray-50 min-h-screen p-8">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-bold text-gray-900">{classData.name}</h1>
-        <p className="text-gray-600 mt-2">{classData.description}</p>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">{classData.name}</h1>
+            <p className="text-gray-600 mt-2">{classData.description}</p>
+          </div>
+          <div className="mt-6 flex justify-start">
+            <MarkAsCompleted />
+          </div>
+        </div>
 
         {/* Recursos Externos */}
         {classData.resources.External && classData.resources.External.length > 0 ? (
@@ -71,13 +79,8 @@ export default function ResourcesFromClass() {
             </div>
           </div>
         ) : null}
-
-        {/* Marcar como completado */}
-        <div className="mt-6 flex justify-end">
-          <MarkAsCompleted />
-        </div>
       </div>
+      <GptChat />
     </div>
   );
-
 }
