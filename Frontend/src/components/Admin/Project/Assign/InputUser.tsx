@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { AssignProjectType } from "../../../../types/project";
 import { useCallback, useState } from "react";
 import debounce from "just-debounce-it";
@@ -7,9 +7,10 @@ import { EmployeeResponseType } from "../../../../types/employee";
 
 interface InputUserProps {
     register: UseFormRegister<AssignProjectType>;
+    errors: FieldErrors<AssignProjectType>
 }
 
-export default function InputUser({ register }: InputUserProps) {
+export default function InputUser({ register, errors }: InputUserProps) {
     const [userId, setUserId] = useState<string>("");
     const [employees, setEmployees] = useState<EmployeeResponseType[]>([]);
     const [selectedEmployee, setSelectedEmployee] = useState<EmployeeResponseType | null>(null);
@@ -80,6 +81,9 @@ export default function InputUser({ register }: InputUserProps) {
                     <p className="text-gray-800">{selectedEmployee.name}</p>
                 </div>
             )}
+            {
+                errors.userId && <p className="text-red-500 text-sm">{errors.userId.message}</p>
+            }
         </div>
     );
 }

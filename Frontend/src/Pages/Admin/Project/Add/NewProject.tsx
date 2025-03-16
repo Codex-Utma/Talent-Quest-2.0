@@ -1,6 +1,6 @@
-import InputCourses from "../components/InputCourses";
+import InputCourses from "../../../../components/Admin/Project/Add/InputCourses";
 
-import { FieldErrors, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ProjectInputType } from "../../../../types/project";
@@ -12,7 +12,7 @@ const NewProject = () => {
 
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm<ProjectInputType>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ProjectInputType>({
         resolver: zodResolver(projectSchema),
     });
 
@@ -30,17 +30,12 @@ const NewProject = () => {
         }
     }
 
-    const onError = (errors: FieldErrors) => {
-        alert("Error al crear el proyecto");
-        console.log(errors);
-    }
-
     return (
         <div className="flex flex-col p-8 bg-transparent">
             {/* Contenido Principal */}
             <div className="py-10">
                 <h1 className="text-2xl font-bold mb-6">Nuevo Proyecto</h1>
-                <form className="space-y-6" onSubmit={handleSubmit(onSubmit, onError)}>
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     {/* Nombre del Proyecto */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -52,6 +47,9 @@ const NewProject = () => {
                             className="block w-full border border-gray-300 rounded-md p-2"
                             {...register("name")}
                         />
+                        {
+                            errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>
+                        }
                     </div>
 
                     {/* Descripción */}
@@ -64,10 +62,16 @@ const NewProject = () => {
                             className="block w-full border border-gray-300 rounded-md p-2"
                             {...register("description")}
                         ></textarea>
+                        {
+                            errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>
+                        }
                     </div>
 
                     {/* Cursos Asociados */}
                     <InputCourses register={register} />
+                    {
+                        errors.courses && <p className="text-red-500 text-sm">{errors.courses.message}</p>
+                    }
 
                     {/* Botón de Guardar */}
                     <div className="flex justify-end space-x-4">

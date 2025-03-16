@@ -1,4 +1,4 @@
-import { ProjectListType } from "../../../../types/project";
+import { ProjectListType } from "../../../types/project";
 
 export default function ProjectRecord({project}: {project: ProjectListType}) {
     return (

@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { AssignProjectType } from "../../../../types/project";
 import { useCallback, useState } from "react";
 import debounce from "just-debounce-it";
@@ -7,9 +7,10 @@ import { ProjectResponseType } from "../../../../types/project";
 
 interface InputProjectProps {
     register: UseFormRegister<AssignProjectType>;
+    errors: FieldErrors<AssignProjectType>
 }
 
-export default function InputProject({ register }: InputProjectProps) {
+export default function InputProject({ register, errors }: InputProjectProps) {
 
     const [projectName, setProjectName] = useState<string>("");
     const [projects, setProjects] = useState<ProjectResponseType[]>([]);
@@ -84,6 +85,9 @@ export default function InputProject({ register }: InputProjectProps) {
                     <p className="text-gray-800">{selectedProject.name}</p>
                 </div>
             )}
+            {
+                errors.projectId && <p className="text-red-500 text-sm">{errors.projectId.message}</p>
+            }
         </div>
     )
 }

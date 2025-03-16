@@ -3,8 +3,8 @@ import { AssignProjectType } from "../../../types/project";
 
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import InputProject from "./components/InputProject";
-import InputUser from "./components/InputUser";
+import InputProject from "../../../components/Admin/Project/Assign/InputProject";
+import InputUser from "../../../components/Admin/Project/Assign/InputUser";
 import { AxiosInstance } from "../../../config/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const AssignWorker = () => {
 
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm<AssignProjectType>({
+    const { register, handleSubmit, formState: { errors } } = useForm<AssignProjectType>({
         resolver: zodResolver(assignProjectSchema),
     });
 
@@ -29,20 +29,22 @@ const AssignWorker = () => {
         }
     }
 
-    const onError = (errors: FieldErrors) => {
-        alert("Error al asignar el proyecto");
-        console.log(errors);
-    }
-
     return (
         <div className="flex flex-col p-8 bg-transparent">
-            <form className="py-10 space-y-6" onSubmit={handleSubmit(onSuccess, onError)}>
+
+            <h1
+                className="text-4xl font-bold mb-6"
+            >
+                Asignar Proyecto
+            </h1>
+
+            <form className="py-10 space-y-6" onSubmit={handleSubmit(onSuccess)}>
                 {/* Proyecto */}
-                <InputProject register={register} />
+                <InputProject register={register} errors={errors}  />
 
                 {/* ID del empleado */}
 
-                <InputUser register={register} />
+                <InputUser register={register} errors={errors} />
 
                 {/* Botones */}
                 <div className="flex justify-end space-x-4">
