@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { ResourceResponseType, ExternalResourceType, ResourceFileType } from "../../../types/resource";
 import { AxiosInstance } from "../../../config/axios";
 import { useParams } from "react-router-dom";
-import CustomLinkResource from "./CustomLinkResource";
-import CustomFileResource from "./CustomFileResource";
-import MarkAsCompleted from "./MarkAsCompleted";
-import GptChat from "./GtpChat";
+import CustomLinkResource from "../../../components/Employee/Class/CustomLinkResource";
+import CustomFileResource from "../../../components/Employee/Class/CustomFileResource";
+import MarkAsCompleted from "../../../components/Employee/Class/MarkAsCompleted";
+import GptChat from "../../../components/Employee/Class/GtpChat";
 
 export default function ResourcesFromClass() {
   const { classId } = useParams<{ classId: string }>();

@@ -31,7 +31,7 @@ import Project from './Pages/Admin/Project/Project.tsx'
 
 import AdministratorPage from './Pages/Admin/Main.tsx'
 
-import Kardex from './Pages/kardex.tsx'
+import Kardex from './Pages/User/Kardex.tsx'
 
 import EmployeeProject from './Pages/User/Project/proyecto.tsx'
 import ModuleFromCourse from './Pages/User/Course/Modules.tsx'

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
-import { CertificationType, InsigniaType, KardexType, ProjectType, UserType } from "../types/kardex";
-import { AxiosInstance } from "../config/axios";
+import { CertificationType, InsigniaType, KardexType, ProjectType, UserType } from "../../types/kardex";
+import { AxiosInstance } from "../../config/axios";
 
 const Kardex: FC = () => {
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ClassType, ClassesType } from "../../../types/class";
 import { AxiosInstance } from "../../../config/axios";
 import { useParams } from "react-router-dom";
-import CustomClass from "./CustomClass";
+import CustomClass from "../../../components/Employee/Module/CustomClass";
 
 export default function ClassesFromModule() {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -22,7 +22,7 @@ export default function ClassesFromModule() {
       }
     };
     fetchData();
-  }, []);
+  }, [moduleId]);
 
   if (loading) {
     return (

@@ -1,8 +1,8 @@
-import Navbar from "./Components/NavbarProps";
+import Navbar from "../../components/Employee/Main/Navbar";
 import { useState, useEffect } from "react";
 import { AxiosInstance } from "../../config/axios";
 import { CourseData, DashboardResponseType } from "../../types/dashboard";
-import CourseDashboard from "./Components/cursos";
+import CourseDashboard from "../../components/Employee/Main/CourseDashboard";
 
 const MisCursos = () => {
   const [dashboardData, setDashboardData] = useState<DashboardResponseType>({} as DashboardResponseType);
