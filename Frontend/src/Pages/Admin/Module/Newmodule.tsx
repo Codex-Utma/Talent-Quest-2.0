@@ -1,4 +1,4 @@
-import { FieldErrors, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { moduleSchema } from "../../../schemas/module.schema";
@@ -12,7 +12,7 @@ const NewModule = () => {
     const { courseId } = useParams();
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm<ModuleType>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ModuleType>({
         resolver: zodResolver(moduleSchema),
     });
 
@@ -27,11 +27,6 @@ const NewModule = () => {
         } catch (error: any) {
             alert(error.response.data.message);
         }
-    }
-
-    const onError = (errors: FieldErrors) => {
-        alert("Error al crear el módulo");
-        console.log(errors);
     }
 
     return (
@@ -53,7 +48,7 @@ const NewModule = () => {
                     <div className="col-span-1">
                         <div className="bg-white shadow rounded-lg p-6">
                             <h2 className="text-lg font-medium text-gray-900 mb-4">Detalles del Módulo</h2>
-                            <form onSubmit={handleSubmit(onSuccess, onError)}>
+                            <form onSubmit={handleSubmit(onSuccess)}>
                                 <div className="space-y-6">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700">Título del Módulo</label>
@@ -62,6 +57,9 @@ const NewModule = () => {
                                             placeholder="Modulo..."
                                             {...register("name")}
                                             />
+                                            {
+                                                errors.name && <p className="text-red-500 text-xs italic">{errors.name.message}</p>
+                                            }
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700">Descripción</label>
@@ -70,6 +68,9 @@ const NewModule = () => {
                                             placeholder="Describe el contenido del módulo..."
                                             {...register("description")}
                                             ></textarea>
+                                            {
+                                                errors.description && <p className="text-red-500 text-xs italic">{errors.description.message}</p>
+                                            }
                                         <button className="bg-black text-white rounded px-4 py-2 flex items-center hover:cursor-pointer">
                                             <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16v4a2 2 0 002 2h14a2 2 0 002-2v-4m-8-4l-4 4m0 0l-4-4m4 4V4" />

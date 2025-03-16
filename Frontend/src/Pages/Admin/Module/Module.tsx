@@ -6,8 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosInstance } from '../../../config/axios';
 
 import { ModulesType, ModuleType } from '../../../types/module';
-import ModuleRecord from './components/ModuleRecord';
 import { CoursesType } from '../../../types/course';
+import ModuleTable from '../../../components/Admin/Module/ModuleTable';
 
 const Module = () => {
 
@@ -50,7 +50,7 @@ const Module = () => {
 
         <button className="bg-blue-600 text-white rounded-md px-4 py-2 mb-8 hover:cursor-pointer"
           onClick={() => navigate(`/admin/courses/${courseId}/add`)}>
-          <i className="fas fa-user-plus mr-2"></i>
+          <i className="fas fa-plus mr-2"></i>
           Nuevo Módulo
         </button>
 
@@ -70,37 +70,7 @@ const Module = () => {
 
         {/* Tabla de módulos */}
         <div className="bg-white shadow rounded-lg overflow-hidden mb-6">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre del Módulo
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Descripción
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {
-                modules.length > 0 ? (
-                  modules.map((module) => (
-                    <ModuleRecord key={module.id} module={module} />
-                  ))
-                ) : (
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap" colSpan={3}>
-                      <div className="text-center text-gray-500">No hay cursos disponibles</div>
-                    </td>
-                  </tr>
-                )
-              }
-              {/* Repite para otros módulos */}
-            </tbody>
-          </table>
+          <ModuleTable modules={modules} />
         </div>
 
         {/* Botón para agregar módulo */}
