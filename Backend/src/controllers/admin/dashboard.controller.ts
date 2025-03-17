@@ -139,11 +139,6 @@ const getKardexData = async (req: Request, res: Response) => {
                 AND: [
                     {
                         userId: currentUser.id
-                    },
-                    {
-                        Project: {
-                            isFinished: true
-                        }
                     }
                 ]
             },
