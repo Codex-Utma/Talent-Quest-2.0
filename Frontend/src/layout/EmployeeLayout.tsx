@@ -1,11 +1,21 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import useAuth from "../hooks/useAuth";
 import { AxiosInstance } from "../config/axios";
 import LogoutButton from "./components/LogoutButton";
+import Dyslexia from "../Pages/User/Dyslexia";
 
 export default function EmployeeLayout() {
+
+    const [isDyslexic, setIsDyslexic] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        const isDyslexic = localStorage.getItem('isDyslexic');
+        if (isDyslexic) {
+            setIsDyslexic(JSON.parse(isDyslexic));
+        }
+    }, []);
 
     const navigate = useNavigate();
 
@@ -23,8 +33,10 @@ export default function EmployeeLayout() {
         validateAuth();
     }, [user, navigate, logout]);
 
-    return (
 
+    return isDyslexic === null ? (
+        <Dyslexia isDyslexic={isDyslexic} setIsDyslexic={setIsDyslexic} />
+    ) : (
         <>
             <nav className="bg-white shadow">
                 <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
