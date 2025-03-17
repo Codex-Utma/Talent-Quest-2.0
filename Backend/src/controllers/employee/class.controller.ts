@@ -187,15 +187,13 @@ const getGptResponse = async (req: Request, res: Response) => {
 
         const prompt = createGptPrompt(currentCourse.name, currentModule.name, currentClass.name, message);
 
-        console.log(prompt);
-
         let gptResponse;
 
         try {
             gptResponse = await openai.chat.completions.create({
-                model: "text-moderation-latest",
+                model: "gpt-3.5-turbo-0125",
                 messages: [{ role: "user", content: prompt }],
-                max_tokens: 500,
+                max_tokens: 250,
             });
         } catch (error: any) {
             console.log(error);
