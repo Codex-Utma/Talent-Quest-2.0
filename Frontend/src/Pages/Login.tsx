@@ -69,6 +69,9 @@ const Login = () => {
               {...register("password")}
               required
             />
+            {
+              errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>
+            }
           </div>
           <button
             type="submit"
