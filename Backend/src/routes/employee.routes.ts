@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { getDashboardInfo, getKardexData } from "../controllers/employee/main.controller";
-import authMiddleware from "../utils/helpers/authMiddleware";
 
 import moduleRouter from "./employee/course.routes";
 import classRouter from "./employee/module.routes";
@@ -8,11 +7,11 @@ import { getFileResource, getResourcesByClass } from "../controllers/admin/resou
 
 const router = Router();
 
-router.get("/dashboard", authMiddleware("employee"), (req, res) => {
+router.get("/dashboard", (req, res) => {
     getDashboardInfo(req, res);
 });
 
-router.get("/kardex", authMiddleware("employee"), (req, res) => {
+router.get("/kardex", (req, res) => {
     getKardexData(req, res);
 });
 

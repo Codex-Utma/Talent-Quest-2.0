@@ -9,7 +9,7 @@ router.get("/:moduleId", (req, res) => {
     getClasses(req, res);
 });
 
-router.patch("/", authMiddleware("employee"), (req, res) => {
+router.patch("/", (req, res) => {
     addClassCompleted(req, res);
 });
 
