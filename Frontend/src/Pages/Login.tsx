@@ -1,4 +1,4 @@
-import { FieldErrors, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { loginSchema } from "../schemas/login.schema";
@@ -26,7 +26,7 @@ const Login = () => {
     }
   }, [user, navigate]);
 
-  const { register, handleSubmit } = useForm<LoginType>({
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
   });
 
@@ -42,16 +42,11 @@ const Login = () => {
     }
   }
 
-  const onError = (errors: FieldErrors<LoginType>) => {
-    alert("Error al iniciar sesión");
-    console.log(errors);
-  }
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-center text-gray-700">Iniciar Sesión</h2>
-        <form className="space-y-4" onSubmit={handleSubmit(onSuccess, onError)}>
+        <form className="space-y-4" onSubmit={handleSubmit(onSuccess)}>
           <div>
             <label className="block text-gray-600 font-medium">Correo Electrónico</label>
             <input
@@ -61,6 +56,9 @@ const Login = () => {
               {...register("email")}
               required
             />
+            {
+              errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>
+            }
           </div>
           <div>
             <label className="block text-gray-600 font-medium">Contraseña</label>
@@ -71,6 +69,9 @@ const Login = () => {
               {...register("password")}
               required
             />
+            {
+              errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>
+            }
           </div>
           <button
             type="submit"

@@ -1,8 +1,8 @@
-import { ModuleResponseType } from "../../../../types/module";
+import { ModuleType } from "../../../types/module";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function ModuleRecord({ module }: { module: ModuleResponseType }) {
+export default function ModuleRecord({ module }: { module: ModuleType }) {
 
     const navigate = useNavigate();
 
