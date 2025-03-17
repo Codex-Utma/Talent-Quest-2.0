@@ -1,7 +1,7 @@
 import { assignProjectSchema } from "../../../schemas/assignProject.schema";
 import { AssignProjectType } from "../../../types/project";
 
-import { FieldErrors, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputProject from "../../../components/Admin/Project/Assign/InputProject";
 import InputUser from "../../../components/Admin/Project/Assign/InputUser";
@@ -23,9 +23,10 @@ const AssignWorker = () => {
                 employeeId: data.userId
             });
             alert(response.data.message);
-            navigate("/admin/project");
         } catch (error: any) {
             alert(error.response.data.message);
+        } finally {
+            navigate("/admin/project");
         }
     }
 
