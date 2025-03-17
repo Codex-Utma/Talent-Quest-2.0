@@ -1,0 +1,217 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model UserType {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users User[]
+}
+
+model Insignia {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users UserInsignia[]
+}
+
+model Department {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users User[]
+}
+
+model ResourceType {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  resources Resource[]
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  isFinished Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users ProjectAssigned[]
+  coursesNeeded CoursesNeeded[]
+  usersProject User[]
+}
+
+model User {
+  id String @id
+  name String @db.VarChar(32)
+  lastName String @db.VarChar(32)
+  email String @db.VarChar(128)
+  password String @db.VarChar(128)
+  UserType UserType @relation(fields: [userTypeId], references: [id])
+  userTypeId Int
+  Department Department @relation(fields: [departmentId], references: [id])
+  departmentId Int
+  Project Project? @relation(fields: [projectId], references: [id])
+  projectId Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  insignias UserInsignia[]
+  projects ProjectAssigned[]
+  coursesProgress Progress[]
+  classesCompleted ClassCompleted[]
+  certifications CertificationUser[]
+}
+
+model UserInsignia {
+  id Int @id @default(autoincrement())
+  User User @relation(fields: [userId], references: [id])
+  userId String
+  Insignia Insignia @relation(fields: [insigniaId], references: [id])
+  insigniaId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  amountClasses Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  modules Module[]
+  projectsNeeds CoursesNeeded[]
+  usersProgress Progress[]
+  certification Certification?
+  relatedCourses        RelatedCourses[] @relation(name: "CourseRelation")
+  relatedAsCourse       RelatedCourses[] @relation(name: "RelatedCourseRelation")
+}
+
+model Module {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  courseId Int
+  Course Course @relation(fields: [courseId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  classes Class[]
+}
+
+model Class {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  Module Module @relation(fields: [moduleId], references: [id])
+  moduleId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  resources Resource[]
+  usersCompleted ClassCompleted[]
+}
+
+model Resource {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  url String @db.VarChar(128)
+  ResourceType ResourceType @relation(fields: [resourceTypeId], references: [id])
+  resourceTypeId Int
+  Class Class @relation(fields: [classId], references: [id])
+  classId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProjectAssigned {
+  id Int @id @default(autoincrement())
+  Project Project @relation(fields: [projectId], references: [id])
+  projectId Int
+  User User @relation(fields: [userId], references: [id])
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CoursesNeeded {
+  id Int @id @default(autoincrement())
+  Course Course @relation(fields: [courseId], references: [id])
+  courseId Int
+  Project Project @relation(fields: [projectId], references: [id])
+  projectId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Progress {
+  id Int @id @default(autoincrement())
+  Course Course @relation(fields: [courseId], references: [id])
+  courseId Int
+  User User @relation(fields: [userId], references: [id])
+  userId String
+  percentage Decimal @db.Decimal(5, 2) @default(0)
+  isFinished Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ClassCompleted {
+  id Int @id @default(autoincrement())
+  Class Class @relation(fields: [classId], references: [id])
+  classId Int
+  User User @relation(fields: [userId], references: [id])
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Certification {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(32)
+  description String @db.VarChar(128)
+  Course Course @relation(fields: [courseId], references: [id])
+  courseId Int @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users CertificationUser[]
+}
+
+model CertificationUser {
+  id Int @id @default(autoincrement())
+  Certification Certification @relation(fields: [certificationId], references: [id])
+  certificationId Int
+  User User @relation(fields: [userId], references: [id])
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RelatedCourses {
+  id               Int     @id @default(autoincrement())
+  course          Course  @relation(fields: [courseId], references: [id], name: "CourseRelation")
+  courseId         Int
+  relatedCourse   Course  @relation(fields: [relatedCourseId], references: [id], name: "RelatedCourseRelation")
+  relatedCourseId  Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
