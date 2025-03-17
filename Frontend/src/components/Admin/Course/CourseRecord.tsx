@@ -1,4 +1,4 @@
-import { CoursesType } from "../../../../types/course";
+import { CoursesType } from "../../../types/course";
 
 import { useNavigate } from "react-router-dom";
 
