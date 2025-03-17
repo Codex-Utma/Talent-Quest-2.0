@@ -7,6 +7,7 @@ const headers = [
 ]
 
 export default function CertificationTable({ certifications } : { certifications: CertificationType[] }) {
+
     return (
         <table className="w-full">
             <thead>
@@ -22,10 +23,10 @@ export default function CertificationTable({ certifications } : { certifications
             <tbody>
                 {
                     certifications.map(cert => (
-                        <tr key={cert.id} className="border-b">
-                            <td className="py-2">{cert.name}</td>
-                            <td className="py-2">{cert.description}</td>
-                            <td className="py-2">{cert.createdAt}</td>
+                        <tr key={cert.Certification.id} className="border-b">
+                            <td className="py-2">{cert.Certification.name}</td>
+                            <td className="py-2">{cert.Certification.description}</td>
+                            <td className="py-2">{cert.Certification.createdAt.split("T")[0]}</td>
                         </tr>
                     ))
                 }

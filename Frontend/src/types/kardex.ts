@@ -18,10 +18,12 @@ export interface ProjectType {
 }
 
 export interface CertificationType {
-    id: number;
-    name: string;
-    description: string;
-    createdAt: string;
+    Certification: {
+        id: number;
+        name: string;
+        description: string;
+        createdAt: string;
+    };
 }
 
 export interface UserType {
