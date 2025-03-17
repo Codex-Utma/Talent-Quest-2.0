@@ -13,8 +13,10 @@ export interface InsigniaType {
 }
 
 export interface ProjectType {
-    id: number;
-    name: string;
+    Project: {
+        id: number;
+        name: string;
+    }
 }
 
 export interface CertificationType {

@@ -56,7 +56,7 @@ const KardexUsers: FC = () => {
                         <div className="ml-auto flex items-center">
                             {
                                 insignias.map(insignia => (
-                                    <span key={insignia.id} className="bg-blue-500 text-white py-1 px-2 rounded mr-2">{insignia.name}</span>
+                                    <span key={insignia.Insignia.id} className="bg-blue-500 text-white py-1 px-2 rounded mr-2">{insignia.Insignia.name}</span>
                                 ))
                             }
                         </div>
@@ -78,10 +78,10 @@ const KardexUsers: FC = () => {
                         <tbody>
                             {
                                 certifications.map(cert => (
-                                    <tr key={cert.id} className="border-b">
-                                        <td className="py-2">{cert.name}</td>
-                                        <td className="py-2">{cert.description}</td>
-                                        <td className="py-2">{cert.createdAt}</td>
+                                    <tr key={cert.Certification.id} className="border-b">
+                                        <td className="py-2">{cert.Certification.name}</td>
+                                        <td className="py-2">{cert.Certification.description}</td>
+                                        <td className="py-2">{cert.Certification.createdAt.split("T")[0]}</td>
                                     </tr>
                                 ))
                             }
@@ -95,8 +95,8 @@ const KardexUsers: FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {
                             projects.map(project => (
-                                <div key={project.id} className="bg-gray-50 rounded-lg shadow p-4">
-                                    <h3 className="text-xl font-semibold">{project.name}</h3>
+                                <div key={project.Project.id} className="bg-gray-50 rounded-lg shadow p-4">
+                                    <h3 className="text-xl font-semibold">{project.Project.name}</h3>
                                 </div>
                             ))
                         }
