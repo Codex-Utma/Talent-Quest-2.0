@@ -34,10 +34,6 @@ app.use('/api/employee', authMiddleware("employee"), employeeRouter);
 
 const PORT = process.env.PORT || 4000;
 
-app.get("/", (req, res) => {
-    res.send({ message: "Hello World" });
-});
-
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
