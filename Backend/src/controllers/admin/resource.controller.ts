@@ -275,8 +275,7 @@ const getFileResource = async (req: Request, res: Response) => {
                 return returnResponse(res, 500, "Error al descargar el archivo");
             }
         });
-    } catch (error) {
-        console.log(error);
+    } catch {
         return returnResponse(res, 500, "Error interno del servidor");
     }
 };

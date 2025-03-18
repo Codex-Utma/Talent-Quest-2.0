@@ -203,8 +203,7 @@ const getGptResponse = async (req: Request, res: Response) => {
         const response = gptResponse.choices[0].message.content;
 
         return returnResponse(res, 200, "Respuesta generada", response);
-    } catch (error) {
-        console.log(error);
+    } catch {
         return returnResponse(res, 500, "Error interno del servidor");
     }
 };
